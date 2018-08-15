@@ -3,4 +3,15 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!--主页的颜色资源-->
+    <color name="home_bg_black">#000000</color>
+    <color name="home_bg_white">#FFFFFF</color>
+    <color name="home_bg_gray">#00F1F1F1</color>
+    <color name="home_transparent">#00FFFFFF</color>
+    <color name="home_text_gray">#8D7A71</color>
+    <color name="home_text_white">#FFFFFF</color>
+    <color name="home_text_yellow">#FFC800</color>
+    <color name="home_div_white">#E5E5E5</color>
+
 </resources>

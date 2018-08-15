@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">kuaibang</string>
+
+    <string name="home_tab_menu_share">资源分享</string>
+    <string name="home_tab_menu_discuss">吐槽中心</string>
+
 </resources>
