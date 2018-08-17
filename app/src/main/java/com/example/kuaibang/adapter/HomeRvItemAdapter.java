@@ -17,8 +17,10 @@ public class HomeRvItemAdapter extends BaseQuickAdapter<Test,BaseViewHolder> {
 
     @Override
     protected void convert(BaseViewHolder helper, Test item) {
-        helper.setText(R.id.home_rv_item_title,item.getTitle())
-                .setText(R.id.home_rv_item_content,item.getContent())
-                .setImageResource(R.id.home_rv_item_img,R.mipmap.ic_launcher);
+//        helper.setText(R.id.home_rv_item_title,item.getTitle())
+//                .setText(R.id.home_rv_item_content,item.getContent())
+//                .setImageResource(R.id.home_rv_item_img,R.mipmap.ic_launcher);
+        // Glide使用示例
+    //  Glide.with(mContext).load(item.getUserAvatar()).crossFade().into((ImageView) viewHolder.getView(R.id.iv));
     }
 }

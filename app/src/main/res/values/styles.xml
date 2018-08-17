@@ -8,6 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="MyActivityTheme" parent="AppTheme"></style>
+
 
 
     <!--首页底部tab标签单选按钮的共同样式-->
@@ -18,7 +20,7 @@
         <item name="android:background">@drawable/home_tab_bg_selector</item>
         <item name="android:button">@null</item>
         <item name="android:gravity">center</item>
-        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingTop">0dp</item>
         <item name="android:textColor">@drawable/home_tab_text_selector</item>
         <item name="android:textSize">8sp</item>
     </style>

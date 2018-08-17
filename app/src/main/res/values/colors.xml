@@ -14,4 +14,7 @@
     <color name="home_text_yellow">#FFC800</color>
     <color name="home_div_white">#E5E5E5</color>
 
+    <!--页面头部toolbar颜色-->
+    <color name="header_bar_yellow">#FFDB42</color>
+
 </resources>

@@ -4,43 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:fitsSystemWindows="true">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/home_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/home_text_yellow">
-
-    </android.support.v7.widget.Toolbar>
+    <include android:id="@+id/home_header_bar"
+        layout="@layout/home_header_bar"
+        android:fitsSystemWindows="true"/>
 
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/home_fg_layout"
         android:layout_width="match_parent"
-        android:layout_height="480dp"
+        android:layout_height="472dp"
         app:layout_constraintBottom_toTopOf="@+id/home_rg_tab_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/home_header_bar">
 
     </android.support.constraint.ConstraintLayout>
 
     <RadioGroup
         android:id="@+id/home_rg_tab_bar"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="44dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="4dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="2dp"
         android:background="@color/home_bg_white"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/home_fg_layout"
-        app:layout_constraintStart_toStartOf="@+id/home_fg_layout"
-        app:layout_constraintTop_toBottomOf="@+id/home_fg_layout"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/home_fg_layout">
 
         <RadioButton
             android:id="@+id/home_rb_share"
@@ -50,9 +45,11 @@
 
         <RadioButton
             android:id="@+id/home_rb_help"
-            style="@style/tab_menu_item"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:drawableTop="@drawable/home_tab_my_selector" />
+            android:button="@null"
+            android:drawableTop="@mipmap/ic_flash" />
 
         <RadioButton
             android:id="@+id/home_rb_discuss"
@@ -61,5 +58,6 @@
             android:text="吐槽中心" />
 
     </RadioGroup>
+
 
 </android.support.constraint.ConstraintLayout>
