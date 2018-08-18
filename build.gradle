@@ -25,6 +25,7 @@ allprojects {
 
         //BaseRecyclerViewAdapterHelper万能适配器库
         maven { url "https://jitpack.io" }
+
     }
 }
 
