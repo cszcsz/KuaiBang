@@ -19,6 +19,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected int mScreenWidth;
     protected int mScreenHeight;
 
+    protected int mThemeColor;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +32,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(metric);
         mScreenWidth = metric.widthPixels;
         mScreenHeight = metric.heightPixels;
+        mThemeColor = R.color.header_bar_yellow;
 
 //        setContentView();  //顺序不能乱
 //        initView();

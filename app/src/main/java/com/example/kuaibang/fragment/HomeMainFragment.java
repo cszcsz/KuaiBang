@@ -13,11 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.ajguan.library.EasyRefreshLayout;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.kuaibang.R;
 import com.example.kuaibang.adapter.HomeRvItemAdapter;
 import com.example.kuaibang.entity.Test;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +27,7 @@ import java.util.List;
 public class HomeMainFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private EasyRefreshLayout easyRefreshLayout;
+    private RefreshLayout refreshLayout;
     private List<Test> datas;
     private HomeRvItemAdapter adapter;
 
@@ -40,7 +42,7 @@ public class HomeMainFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.home_main_fg,container,false);
         recyclerView = view.findViewById(R.id.home_recycle_view);
-        easyRefreshLayout = view.findViewById(R.id.home_refresh_layout);
+        refreshLayout = view.findViewById(R.id.home_refresh_layout);
         datas = new ArrayList<>();
         Test testData;
         int i;
@@ -72,48 +74,39 @@ public class HomeMainFragment extends Fragment {
         });
 
 
-        // 为recycleView设置下拉加载，上拉刷新功能，PS:若需要，可以自定义加载和刷新的UI界面
-        easyRefreshLayout.addEasyEvent(new EasyRefreshLayout.EasyEvent() {
+        // 为recycleView设置下拉加载，上拉刷新功能
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
-            public void onLoadMore() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        final List<Test> moreDatas = new ArrayList<>();
-                        Test moreData;
-                        for (int i=0;i<5;i++){
-                            moreData = new Test();
-                            moreData.setTitle("我是第"+i+"条标题");
-                            moreData.setContent("第" + i + "条内容");
-                            moreDatas.add(moreData);
-                        }
-                        adapter.getData().addAll(moreDatas);
-                        adapter.notifyDataSetChanged();
-                        easyRefreshLayout.loadMoreComplete();
-                    }
-                },1000);
-            }
-
-            @Override
-            public void onRefreshing() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        List<Test> newDatas = new ArrayList<>();
-                        Test newData;
-                        for (int i=0;i<5;i++){
-                            newData = new Test();
-                            newData.setTitle("哈哈，我是新的第"+i+"条标题");
-                            newData.setContent("呵呵，我是新的第" + i + "条内容");
-                            newDatas.add(newData);
-                        }
-                        adapter.setNewData(newDatas);
-                        easyRefreshLayout.refreshComplete();
-                        Toast.makeText(getContext(),"refresh success!",Toast.LENGTH_SHORT).show();
-                    }
-                },1000);
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                List<Test> newDatas = new ArrayList<>();
+                Test newData;
+                for (int i=0;i<5;i++){
+                    newData = new Test();
+                    newData.setTitle("哈哈，我是新的第"+i+"条标题");
+                    newData.setContent("呵呵，我是新的第" + i + "条内容");
+                    newDatas.add(newData);
+                }
+                adapter.setNewData(newDatas);
+                refreshLayout.finishRefresh(1000); // 第一个参数表示延时时间，第二个参数若传入false表示刷新失败
             }
         });
+        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                List<Test> moreDatas = new ArrayList<>();
+                Test moreData;
+                for (int i=0;i<4;i++){
+                    moreData = new Test();
+                    moreData.setTitle("我是第"+i+"条标题");
+                    moreData.setContent("第" + i + "条内容");
+                    moreDatas.add(moreData);
+                }
+                adapter.getData().addAll(moreDatas);
+                adapter.notifyDataSetChanged();
+                refreshLayout.finishLoadMore(1000);
+            }
+        });
+
 
         adapter.openLoadAnimation();
         recyclerView.setAdapter(adapter);

@@ -1,5 +1,6 @@
 package com.example.kuaibang;
 
+import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -10,6 +11,7 @@ import android.widget.RadioGroup;
 import com.example.kuaibang.fragment.HomeDiscussFragment;
 import com.example.kuaibang.fragment.HomeMainFragment;
 import com.example.kuaibang.fragment.HomeShareFragment;
+import com.jaeger.library.StatusBarUtil;
 
 public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener {
 
@@ -37,6 +39,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     public void setContentView() {
         // 该函数专门用于设置活动对应的视图
         setContentView(R.layout.home_activity_main);
+//        StatusBarUtil.setColor(MainActivity.this,getResources().getColor(R.color.header_bar_yellow));
     }
 
     @Override
