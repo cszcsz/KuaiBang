@@ -1,19 +1,26 @@
 package com.example.kuaibang.fragment;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.example.kuaibang.HelpDetailActivity;
+import com.example.kuaibang.MainActivity;
 import com.example.kuaibang.R;
 import com.example.kuaibang.adapter.HomeRvItemAdapter;
 import com.example.kuaibang.entity.Test;
@@ -62,7 +69,12 @@ public class HomeMainFragment extends Fragment {
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Toast.makeText(getContext(),"你点击了第"+(position+1)+"条求助帖",Toast.LENGTH_SHORT).show();
+                if(ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_PHONE_STATE)!= PackageManager.PERMISSION_GRANTED){
+                    ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.READ_PHONE_STATE},1);
+                }else {
+                    beginHelpDetailActivity();
+                }
+//                Toast.makeText(getContext(),"你点击了第"+(position+1)+"条求助帖",Toast.LENGTH_SHORT).show();
             }
         });
         // 为rv中每个item条目下面的子控件设置点击事件
@@ -112,5 +124,28 @@ public class HomeMainFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         return view;
+    }
+
+    private void beginHelpDetailActivity(){
+        try{
+            HelpDetailActivity.startMyActivity(getActivity(),"data1","data2");
+        }catch (SecurityException e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode){
+            case 1:
+                if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                    beginHelpDetailActivity();
+                }else {
+                    Toast.makeText(getContext(),"你拒绝了授予权限",Toast.LENGTH_SHORT).show();
+                }
+                break;
+            default:
+                break;
+        }
     }
 }
