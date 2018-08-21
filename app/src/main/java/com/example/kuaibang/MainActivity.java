@@ -26,6 +26,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     private Fragment currentFragment = new Fragment();
     private FragmentManager fragmentManager;
 
+    private long startTime = 0; // 用于实现首页在间隔时间内按两次back键退出app的功能
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,6 +96,17 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             case R.id.home_rb_discuss:
                 showFragment(discussFragment);
                 break;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        long currentTime = System.currentTimeMillis();
+        if ((currentTime - startTime) >= 2000) {
+            ShowToast("再按一次退出应用");
+            startTime = currentTime;
+        } else {
+            finish();
         }
     }
 }

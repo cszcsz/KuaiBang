@@ -3,6 +3,7 @@ package com.example.kuaibang;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ public class HelpDetailActivity extends BaseActivity implements View.OnClickList
     private ImageButton backBtn;
     private Button helpBtn;
     private Dialog dialog;
+    private Dialog success_dialog;
     private Button confirmBtn;
     private Button concelBtn;
     private EditText editText;
@@ -102,7 +104,7 @@ public class HelpDetailActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                ShowToast("备注成功！");
+                showSuccessDialog();
             }
         });
 
@@ -112,5 +114,24 @@ public class HelpDetailActivity extends BaseActivity implements View.OnClickList
                 dialog.dismiss();
             }
         });
+    }
+
+
+    private void showSuccessDialog(){
+        success_dialog = new Dialog(this);
+        success_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View successDialogView = inflater.inflate(R.layout.help_detail_success_dialog,null);
+        success_dialog.setContentView(successDialogView);
+        success_dialog.setCancelable(false);
+        success_dialog.show();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                success_dialog.dismiss();
+                finish();
+            }
+        },2000);
     }
 }
