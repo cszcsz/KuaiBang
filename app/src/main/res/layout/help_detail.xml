@@ -10,7 +10,7 @@
         android:id="@+id/textView5"
         android:layout_width="match_parent"
         android:layout_height="11dp"
-        android:background="#eae8e7"
+        android:background="@color/help_detail_bc_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
@@ -19,7 +19,7 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="9dp"
-        android:background="#eae8e7"
+        android:background="@color/help_detail_bc_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
@@ -27,14 +27,14 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
-        android:layout_height="103dp"
+        android:layout_height="107dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/cardinfo_userimg"
+            android:id="@+id/help_detail_userimg"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginLeft="24dp"
@@ -53,8 +53,8 @@
             android:layout_marginTop="8dp"
             android:text="小傻子"
             android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@+id/cardinfo_userimg"
-            app:layout_constraintTop_toTopOf="@+id/cardinfo_userimg" />
+            app:layout_constraintStart_toEndOf="@+id/help_detail_userimg"
+            app:layout_constraintTop_toTopOf="@+id/help_detail_userimg" />
 
         <ImageView
             android:id="@+id/imageView2"
@@ -95,7 +95,7 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="23dp"
+        android:layout_height="27dp"
         android:background="@color/header_bar_yellow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -103,7 +103,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/imageButton3"
+            android:id="@+id/help_detail_back_btn"
             android:layout_width="19dp"
             android:layout_height="17dp"
             android:layout_marginBottom="3dp"
@@ -121,7 +121,7 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout3"
         android:layout_width="match_parent"
-        android:layout_height="386dp"
+        android:layout_height="383dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -179,7 +179,7 @@
             app:srcCompat="@mipmap/ic_wait" />
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/help_detail_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -190,7 +190,7 @@
             app:layout_constraintTop_toTopOf="@+id/imageView6" />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/help_detail_persons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -202,7 +202,7 @@
             app:layout_constraintTop_toTopOf="@+id/imageView7" />
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/help_detail_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -213,7 +213,7 @@
             app:layout_constraintTop_toTopOf="@+id/imageView8" />
 
         <TextView
-            android:id="@+id/textView10"
+            android:id="@+id/help_detail_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -226,7 +226,7 @@
         <TextView
             android:id="@+id/textView12"
             android:layout_width="332dp"
-            android:layout_height="73dp"
+            android:layout_height="69dp"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
@@ -235,12 +235,12 @@
             android:text="我在南教急需一个充电宝，希望有同学可以帮助下，不胜感激，还可以交个朋友，请你吃好吃哒！"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView10" />
+            app:layout_constraintTop_toBottomOf="@+id/help_detail_time" />
 
         <ImageView
             android:id="@+id/imageView10"
             android:layout_width="130dp"
-            android:layout_height="82dp"
+            android:layout_height="98dp"
             android:layout_marginBottom="4dp"
             android:layout_marginTop="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -249,12 +249,43 @@
             app:layout_constraintVertical_bias="0.2"
             app:srcCompat="@drawable/test_example" />
 
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="44dp"
+            android:layout_height="6dp"
+            android:layout_marginLeft="28dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/header_bar_yellow"
+            app:layout_constraintStart_toEndOf="@+id/help_detail_persons"
+            app:layout_constraintTop_toTopOf="@+id/help_detail_persons" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="44dp"
+            android:layout_height="6dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@color/header_bar_yellow"
+            app:layout_constraintStart_toEndOf="@+id/textView11"
+            app:layout_constraintTop_toTopOf="@+id/textView11" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="44dp"
+            android:layout_height="6dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:background="#b6afae"
+            app:layout_constraintStart_toEndOf="@+id/textView13"
+            app:layout_constraintTop_toTopOf="@+id/textView13" />
+
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout4"
         android:layout_width="match_parent"
-        android:layout_height="32dp"
+        android:layout_height="44dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -263,16 +294,18 @@
         app:layout_constraintVertical_bias="1.0">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/help_detail_help_btn"
             android:layout_width="88dp"
-            android:layout_height="35dp"
-            android:layout_marginBottom="8dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-            android:background="@color/header_bar_yellow"
-            android:drawableTop="@drawable/help_detail_btn_selector"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/shape_circle_corner"
+
+            android:gravity="center"
             android:text="我去帮助"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -282,3 +315,4 @@
 
 
 </android.support.constraint.ConstraintLayout>
+    <!--android:drawableTop="@drawable/help_detail_btn_selector"-->

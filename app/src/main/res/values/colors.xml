@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <!--<color name="app_theme_color">#FFC800</color>-->
+
     <!--主页的颜色资源-->
     <color name="home_bg_black">#000000</color>
     <color name="home_bg_white">#FFFFFF</color>
@@ -16,5 +18,7 @@
 
     <!--页面头部toolbar颜色-->
     <color name="header_bar_yellow">#FFDB42</color>
+
+    <color name="help_detail_bc_gray">#eae8e7</color>
 
 </resources>
