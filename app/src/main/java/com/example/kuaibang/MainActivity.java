@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -14,7 +16,7 @@ import com.example.kuaibang.fragment.HomeMainFragment;
 import com.example.kuaibang.fragment.HomeShareFragment;
 import com.jaeger.library.StatusBarUtil;
 
-public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener {
+public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener,View.OnClickListener {
 
     private RadioGroup rg_tab_bar;
     private RadioButton rb_tab_help;
@@ -25,6 +27,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     private Fragment currentFragment = new Fragment();
     private FragmentManager fragmentManager;
+
+    private ImageButton myMessageBtn;
 
     private long startTime = 0; // 用于实现首页在间隔时间内按两次back键退出app的功能
 
@@ -51,12 +55,14 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         rg_tab_bar = findViewById(R.id.home_rg_tab_bar);
         rb_tab_help = findViewById(R.id.home_rb_help);
         rb_tab_help.setChecked(true);
+        myMessageBtn = findViewById(R.id.home_header_message_btn);
     }
 
     @Override
     public void initListeners() {
         // 该函数为视图中的元素设置事件监听器
         rg_tab_bar.setOnCheckedChangeListener(this);
+        myMessageBtn.setOnClickListener(this);
     }
 
     @Override
@@ -96,6 +102,16 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             case R.id.home_rb_discuss:
                 showFragment(discussFragment);
                 break;
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.home_header_message_btn:  // home页面头部工具栏左侧点击事件
+                MessageActivity.startMyActivity(MainActivity.this,"data1","data2");
+                break;
+            default:
         }
     }
 

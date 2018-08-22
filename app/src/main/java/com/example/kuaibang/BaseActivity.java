@@ -33,7 +33,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         mScreenWidth = metric.widthPixels;
         mScreenHeight = metric.heightPixels;
 
-
 //        setContentView();  //顺序不能乱
 //        initView();
 //        initListeners();
