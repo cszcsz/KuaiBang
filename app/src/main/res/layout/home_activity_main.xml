@@ -4,23 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    tools:context=".MainActivity">
 
-    <include android:id="@+id/home_header_bar"
+    <include
+        android:id="@+id/home_header_bar"
         layout="@layout/home_header_bar"
-        android:fitsSystemWindows="true"/>
+        android:fitsSystemWindows="true"
+        app:layout_constraintBottom_toTopOf="@+id/home_fg_layout"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/home_fg_layout"
         android:layout_width="match_parent"
-        android:layout_height="486dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/home_rg_tab_bar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_header_bar">
+        app:layout_constraintTop_toBottomOf="@+id/home_header_bar"
+        tools:layout_editor_absoluteX="0dp">
 
     </android.support.constraint.ConstraintLayout>
 
@@ -29,13 +30,11 @@
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="2dp"
         android:background="@color/home_bg_white"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/home_fg_layout"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/home_fg_layout">
+        app:layout_constraintTop_toBottomOf="@+id/home_fg_layout"
+        tools:layout_editor_absoluteX="0dp">
 
         <RadioButton
             android:id="@+id/home_rb_share"
@@ -46,8 +45,8 @@
         <RadioButton
             android:id="@+id/home_rb_help"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:button="@null"
             android:drawableTop="@mipmap/ic_flash" />
 
