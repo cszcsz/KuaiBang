@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="42dp"
+    android:id="@+id/title_bar"
+    android:background="@color/header_bar_yellow">
+    <TextView
+        android:text="标题栏"
+        android:id="@+id/text_title"
+        android:textSize="20sp"
+        android:textColor="@color/home_bg_black"
+        android:gravity="center"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <Button
+        android:id="@+id/button_backward"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/header_bar_yellow"
+        android:drawableLeft="@mipmap/ic_back"
+        android:gravity="left|center"
+        android:onClick="onClickBack"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:singleLine="true"
+        android:text="返回"
+        android:textColor="@color/home_bg_black"
+        android:textSize="18sp"
+        style="?android:attr/borderlessButtonStyle"/>
+
+
+    </RelativeLayout>

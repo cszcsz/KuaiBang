@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!--<color name="app_theme_color">#FFC800</color>-->
+
+    <!--主页的颜色资源-->
+    <color name="home_bg_black">#000000</color>
+    <color name="home_bg_white">#FFFFFF</color>
+    <color name="home_bg_gray">#00F1F1F1</color>
+    <color name="home_transparent">#00FFFFFF</color>
+    <color name="home_text_gray">#8D7A71</color>
+    <color name="home_text_white">#FFFFFF</color>
+    <color name="home_text_yellow">#FFC800</color>
+    <color name="home_div_white">#E5E5E5</color>
+
+    <!--页面头部toolbar颜色-->
+    <color name="header_bar_yellow">#FFDB42</color>
+
+    <color name="help_detail_bc_gray">#eae8e7</color>
+
+    <!--个人中心颜色-->
+    <color name="personal_bg_white">#E5E5E5</color>
+    <color name="personal_num_name_black">#000000</color>
+    <color name="personal_text_black">#1c1b1b</color>
+
+</resources>
