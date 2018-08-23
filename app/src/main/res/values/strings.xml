@@ -3,5 +3,10 @@
 
     <string name="home_tab_menu_share">资源分享</string>
     <string name="home_tab_menu_discuss">吐槽中心</string>
+<<<<<<< HEAD
 
+=======
+    <string name="personal_center_title">个人中心</string>
+    <string name="help_detail_title">求助详情</string>
+>>>>>>> 4792ae0f6a64b1ec72757117bf4cf04e9dfaf0c4
 </resources>
