@@ -14,14 +14,12 @@ import com.example.kuaibang.fragment.MessageAssistFragment;
 import com.example.kuaibang.fragment.MessageChatFragment;
 import com.example.kuaibang.fragment.MessageHelpFragment;
 
-public class MessageActivity extends BaseActivity implements View.OnClickListener {
+public class MessageActivity extends TitleActivity implements View.OnClickListener {
 
     private TextView helpView;
     private TextView assistView;
     private TextView chatView;
 
-    private ImageButton backBtn;
-    private TextView title;
 
     private Fragment currentFragment = new Fragment();
     private FragmentManager fragmentManager;
@@ -38,7 +36,7 @@ public class MessageActivity extends BaseActivity implements View.OnClickListene
         initListeners();
         initFragment();
         assistView.setSelected(true);
-        title.setText("我的求助");
+        setTitle(R.string.message_assist_title);
         showFragment(assistFragment);
     }
 
@@ -49,11 +47,10 @@ public class MessageActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void initView() {
+        super.initView();
         helpView = findViewById(R.id.message_tab_helpTextView);
         assistView = findViewById(R.id.message_tab_assistTextView);
         chatView = findViewById(R.id.message_tab_chatTextView);
-        backBtn = findViewById(R.id.message_back_btn);
-        title = findViewById(R.id.message_toolbar_title);
     }
 
     @Override
@@ -61,7 +58,6 @@ public class MessageActivity extends BaseActivity implements View.OnClickListene
         helpView.setOnClickListener(this);
         assistView.setOnClickListener(this);
         chatView.setOnClickListener(this);
-        backBtn.setOnClickListener(this);
     }
 
     @Override
@@ -79,25 +75,22 @@ public class MessageActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.message_back_btn:
-                finish();
-                break;
             case R.id.message_tab_helpTextView:
                 resetTextViewSelected();
                 helpView.setSelected(true);
-                title.setText("我的帮助");
+                setTitle(R.string.message_help_title);
                 showFragment(helpFragment);
                 break;
             case R.id.message_tab_assistTextView:
                 resetTextViewSelected();
                 assistView.setSelected(true);
-                title.setText("我的求助");
+                setTitle(R.string.message_assist_title);
                 showFragment(assistFragment);
                 break;
             case R.id.message_tab_chatTextView:
                 resetTextViewSelected();
                 chatView.setSelected(true);
-                title.setText("我的消息");
+                setTitle(R.string.message_chat_title);
                 showFragment(chatFragment);
                 break;
             default:

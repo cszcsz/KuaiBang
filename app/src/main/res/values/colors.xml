@@ -21,12 +21,11 @@
 
     <color name="help_detail_bc_gray">#eae8e7</color>
 
-<<<<<<< HEAD
-=======
+
     <!--个人中心颜色-->
     <color name="personal_bg_white">#E5E5E5</color>
     <color name="personal_num_name_black">#000000</color>
     <color name="personal_text_black">#1c1b1b</color>
 
->>>>>>> 4792ae0f6a64b1ec72757117bf4cf04e9dfaf0c4
+
 </resources>

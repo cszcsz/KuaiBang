@@ -16,14 +16,9 @@ import android.widget.Toast;
 
 import cn.bmob.v3.b.This;
 
-<<<<<<< HEAD
-public class HelpDetailActivity extends BaseActivity implements View.OnClickListener {
 
-    private ImageButton backBtn;
-=======
 public class HelpDetailActivity extends TitleActivity implements View.OnClickListener {
 
->>>>>>> 4792ae0f6a64b1ec72757117bf4cf04e9dfaf0c4
     private Button helpBtn;
     private Dialog dialog;
     private Dialog success_dialog;
@@ -37,10 +32,8 @@ public class HelpDetailActivity extends TitleActivity implements View.OnClickLis
         setContentView();
         initView();
         initListeners();
-<<<<<<< HEAD
-=======
         initData();
->>>>>>> 4792ae0f6a64b1ec72757117bf4cf04e9dfaf0c4
+        setTitle(R.string.help_detail_title);
     }
 
     @Override
@@ -50,30 +43,18 @@ public class HelpDetailActivity extends TitleActivity implements View.OnClickLis
 
     @Override
     public void initView() {
-<<<<<<< HEAD
-        backBtn = findViewById(R.id.help_detail_back_btn);
-=======
         super.initView();
->>>>>>> 4792ae0f6a64b1ec72757117bf4cf04e9dfaf0c4
         helpBtn = findViewById(R.id.help_detail_help_btn);
     }
 
     @Override
     public void initListeners() {
-<<<<<<< HEAD
-        backBtn.setOnClickListener(this);
-=======
->>>>>>> 4792ae0f6a64b1ec72757117bf4cf04e9dfaf0c4
         helpBtn.setOnClickListener(this);
     }
 
     @Override
     public void initData() {
-<<<<<<< HEAD
-=======
         setTitle(R.string.help_detail_title);
->>>>>>> 4792ae0f6a64b1ec72757117bf4cf04e9dfaf0c4
-
     }
 
     // 启动活动的最佳写法,para1和para2为传递到该活动的数据参数,到时候根据实际情况来传数据
@@ -87,12 +68,6 @@ public class HelpDetailActivity extends TitleActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-<<<<<<< HEAD
-            case R.id.help_detail_back_btn:
-                finish();
-                break;
-=======
->>>>>>> 4792ae0f6a64b1ec72757117bf4cf04e9dfaf0c4
             case R.id.help_detail_help_btn:
                 showDialog();
                 Toast.makeText(HelpDetailActivity.this,"弹出对话框",Toast.LENGTH_SHORT).show();

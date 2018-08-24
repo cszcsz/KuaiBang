@@ -55,7 +55,7 @@ public class MessageHelpFragment extends Fragment {
         helpTablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                Toast.makeText(getContext(),"当前选择为:"+tab.getText(),Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
