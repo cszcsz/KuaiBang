@@ -11,4 +11,16 @@
     <string name="message_assist_title">我的求助</string>
     <string name="message_chat_title">我的消息</string>
 
+
+    <!--已帮助总结页面-->
+    <string name="helped_summary_state">当前状态</string>
+    <string name="helped_summary_content">求助内容</string>
+    <string name="helped_summary_date">完成时间</string>
+    <string name="helped_summary_score">扣除积分</string>
+    <string name="helped_summary_time">历时</string>
+    <string name="helped_summary_persons">参与人数</string>
+    <string name="helped_summary_help_info">我的帮助</string>
+    <string name="helped_summary_success_rate">帮助成功率</string>
+    <string name="helped_summary_head_title"> </string>
+
 </resources>

@@ -128,7 +128,7 @@ public class HomeMainFragment extends Fragment {
 
     private void beginHelpDetailActivity(){
         try{
-            HelpDetailActivity.startMyActivity(getActivity(),"data1","data2");
+            HelpDetailActivity.startMyActivity(getActivity(),true);
         }catch (SecurityException e){
             e.printStackTrace();
         }
