@@ -23,9 +23,11 @@
 
 
     <!--个人中心颜色-->
-    <color name="personal_bg_white">#E5E5E5</color>
+    <color name="personal_bar_white">#FFFFFF</color>
+    <color name="personal_bg_white">#f4efef</color>
     <color name="personal_num_name_black">#000000</color>
     <color name="personal_text_black">#1c1b1b</color>
+    <color name="personal_text_gray">#626161</color>
 
 
 </resources>
