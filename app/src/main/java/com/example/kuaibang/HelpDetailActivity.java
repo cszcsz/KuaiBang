@@ -26,14 +26,16 @@ public class HelpDetailActivity extends TitleActivity implements View.OnClickLis
     private Button concelBtn;
     private EditText editText;
 
+    boolean helpBtnIsShow = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        helpBtnIsShow = getIntent().getBooleanExtra("showBtn",true);
         setContentView();
         initView();
         initListeners();
         initData();
-        setTitle(R.string.help_detail_title);
     }
 
     @Override
@@ -45,6 +47,9 @@ public class HelpDetailActivity extends TitleActivity implements View.OnClickLis
     public void initView() {
         super.initView();
         helpBtn = findViewById(R.id.help_detail_help_btn);
+        if(!helpBtnIsShow){
+            helpBtn.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -58,10 +63,9 @@ public class HelpDetailActivity extends TitleActivity implements View.OnClickLis
     }
 
     // 启动活动的最佳写法,para1和para2为传递到该活动的数据参数,到时候根据实际情况来传数据
-    public static void startMyActivity(Context context,String para1,String para2){
+    public static void startMyActivity(Context context,boolean isShowBtn){
         Intent intent = new Intent(context,HelpDetailActivity.class);
-        intent.putExtra("param1",para1);
-        intent.putExtra("param2",para2);
+        intent.putExtra("showBtn",isShowBtn);
         context.startActivity(intent);
     }
 
@@ -70,7 +74,6 @@ public class HelpDetailActivity extends TitleActivity implements View.OnClickLis
         switch (v.getId()){
             case R.id.help_detail_help_btn:
                 showDialog();
-                Toast.makeText(HelpDetailActivity.this,"弹出对话框",Toast.LENGTH_SHORT).show();
                 break;
             default:
         }

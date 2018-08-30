@@ -1,5 +1,6 @@
 package com.example.kuaibang.fragment;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,9 +11,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.example.kuaibang.HelpDetailActivity;
 import com.example.kuaibang.R;
 import com.example.kuaibang.adapter.MessageHelpingRvAdapter;
 import com.example.kuaibang.adapter.MessageHelpsRvAdapter;
@@ -30,6 +36,13 @@ public class HelpsFragment extends Fragment{
     private RefreshLayout refreshLayout;
     private List<Test> datas;
     private MessageHelpsRvAdapter adapter;
+
+    private Dialog dialog;
+    private TextView dialogSubTitle;
+    private Button confirmBtn;
+    private Button concelBtn;
+    private EditText editText;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,7 +75,7 @@ public class HelpsFragment extends Fragment{
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Toast.makeText(getContext(),"你点击了第"+(position+1)+"条求助帖",Toast.LENGTH_SHORT).show();
+                HelpDetailActivity.startMyActivity(getContext(),false);
             }
         });
         // 为rv中每个item条目下面的子控件设置点击事件
@@ -75,7 +88,7 @@ public class HelpsFragment extends Fragment{
                         Snackbar.make(view,"你点击了第"+(position+1)+"位用户头像",Snackbar.LENGTH_SHORT).show();
                         break;
                     case R.id.message_helps_rv_item_cancelBtn:
-                        Toast.makeText(getContext(),"进入取消帮助界面",Toast.LENGTH_SHORT).show();
+                        showDialog();
                         break;
                 }
 
@@ -133,5 +146,43 @@ public class HelpsFragment extends Fragment{
         return fragment;
     }
 
+    private void showDialog(){
+        dialog = new Dialog(getContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        View dialogView = inflater.inflate(R.layout.help_detail_dialog,null);
+        dialog.setContentView(dialogView);
+        dialog.show();
+        dialog.setCancelable(false);
+        initDialogView(dialogView);
+        initDialogListener();
+
+    }
+
+    private void initDialogView(View view){
+        dialogSubTitle = view.findViewById(R.id.help_detail_subTitle);
+        dialogSubTitle.setText("请输入取消原因");
+        confirmBtn = view.findViewById(R.id.help_detail_confirm_btn);
+        concelBtn = view.findViewById(R.id.help_dialog_cancel_btn);
+        editText = view.findViewById(R.id.help_detail_dialog_edit);
+        editText.setSingleLine(false);
+        editText.setHorizontallyScrolling(false);
+    }
+
+    private void initDialogListener(){
+        confirmBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        concelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+    }
 
 }

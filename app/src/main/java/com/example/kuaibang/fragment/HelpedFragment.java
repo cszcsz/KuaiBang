@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.example.kuaibang.HelpedSummaryActivity;
 import com.example.kuaibang.R;
 import com.example.kuaibang.adapter.MessageHelpsRvAdapter;
 import com.example.kuaibang.entity.Test;
@@ -62,7 +63,7 @@ public class HelpedFragment extends Fragment {
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Toast.makeText(getContext(),"第"+(position+1)+"条求助帖,将进入帮助完成总结页面",Toast.LENGTH_SHORT).show();
+                HelpedSummaryActivity.startMyActivity(getContext(),"data1","data2");
             }
         });
         // 为rv中每个item条目下面的子控件设置点击事件

@@ -1,5 +1,6 @@
 package com.example.kuaibang.fragment;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +11,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -29,6 +34,12 @@ public class HelpingFragment extends Fragment {
     private RefreshLayout refreshLayout;
     private List<Test> datas;
     private MessageHelpingRvAdapter adapter;
+
+    private Dialog dialog;
+    private TextView dialogSubTitle;
+    private Button confirmBtn;
+    private Button concelBtn;
+    private EditText editText;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,7 +88,7 @@ public class HelpingFragment extends Fragment {
                         Toast.makeText(getContext(),"进入和ta详聊界面",Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.message_helping_rv_item_stopBtn:
-                        Toast.makeText(getContext(),"进入终止活动界面",Toast.LENGTH_SHORT).show();
+                        showDialog();
                         break;
                 }
 
@@ -128,5 +139,44 @@ public class HelpingFragment extends Fragment {
     public static HelpingFragment newInstance() {
         HelpingFragment fragment = new HelpingFragment();
         return fragment;
+    }
+
+    private void showDialog(){
+        dialog = new Dialog(getContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        View dialogView = inflater.inflate(R.layout.help_detail_dialog,null);
+        dialog.setContentView(dialogView);
+        dialog.show();
+        dialog.setCancelable(false);
+        initDialogView(dialogView);
+        initDialogListener();
+
+    }
+
+    private void initDialogView(View view){
+        dialogSubTitle = view.findViewById(R.id.help_detail_subTitle);
+        dialogSubTitle.setText("请输入终止原因");
+        confirmBtn = view.findViewById(R.id.help_detail_confirm_btn);
+        concelBtn = view.findViewById(R.id.help_dialog_cancel_btn);
+        editText = view.findViewById(R.id.help_detail_dialog_edit);
+        editText.setSingleLine(false);
+        editText.setHorizontallyScrolling(false);
+    }
+
+    private void initDialogListener(){
+        confirmBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        concelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
     }
 }
