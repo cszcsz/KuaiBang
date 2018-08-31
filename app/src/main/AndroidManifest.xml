@@ -35,6 +35,10 @@
             android:name=".HelpedSummaryActivity"
             android:theme="@style/MyActivityTheme">
         </activity>
+        <activity android:name=".AssistProcessActivity"
+            android:theme="@style/MyActivityTheme">
+        </activity>
+
     </application>
 
 </manifest>
