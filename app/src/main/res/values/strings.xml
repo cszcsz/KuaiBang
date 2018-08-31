@@ -23,4 +23,6 @@
     <string name="helped_summary_success_rate">帮助成功率</string>
     <string name="helped_summary_head_title"> </string>
 
+    <string name="assist_process_title">求助进程</string>
+
 </resources>
