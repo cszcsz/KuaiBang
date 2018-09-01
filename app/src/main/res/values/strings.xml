@@ -4,12 +4,22 @@
     <string name="home_tab_menu_share">资源分享</string>
     <string name="home_tab_menu_discuss">吐槽中心</string>
 
-    <string name="personal_center_title">个人中心</string>
+    
     <string name="help_detail_title">求助详情</string>
 
     <string name="message_help_title">我的帮助</string>
     <string name="message_assist_title">我的求助</string>
     <string name="message_chat_title">我的消息</string>
+    
+    
+    
+    <!--个人中心-->
+    <string name="personal_center_title">个人中心</string>
+    <string name="my_experience">我的历程</string>
+    <string name="pesonal_information">个人资料</string>
+    <string name="settings">设置</string>
+    <string name="about">关于</string>
+    <string name="logout">退出</string>
 
 
     <!--已帮助总结页面-->
