@@ -19,46 +19,61 @@
         android:id="@+id/home_fg_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/home_rg_tab_bar"
+        android:layout_marginBottom="11dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_header_bar">
 
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/home_main_floatBtn"
+            android:layout_width="165dp"
+            android:layout_height="54dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:clickable="true"
+            android:scaleType="center"
+            app:backgroundTint="@color/home_text_yellow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@mipmap/ic_flash_white" />
     </android.support.constraint.ConstraintLayout>
 
-    <RadioGroup
-        android:id="@+id/home_rg_tab_bar"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/home_bg_white"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_fg_layout">
+    <!--<RadioGroup-->
+        <!--android:id="@+id/home_rg_tab_bar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="44dp"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:background="@color/home_bg_white"-->
+        <!--android:orientation="horizontal"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/home_fg_layout">-->
 
-        <RadioButton
-            android:id="@+id/home_rb_share"
-            style="@style/tab_menu_item"
-            android:drawableTop="@drawable/home_tab_channel_selector"
-            android:text="资源分享" />
+        <!--<RadioButton-->
+            <!--android:id="@+id/home_rb_share"-->
+            <!--style="@style/tab_menu_item"-->
+            <!--android:drawableTop="@drawable/home_tab_channel_selector"-->
+            <!--android:text="资源分享" />-->
 
-        <RadioButton
-            android:id="@+id/home_rb_help"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:drawableTop="@mipmap/ic_flash" />
+        <!--<RadioButton-->
+            <!--android:id="@+id/home_rb_help"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:button="@null"-->
+            <!--android:drawableTop="@mipmap/ic_flash" />-->
 
-        <RadioButton
-            android:id="@+id/home_rb_discuss"
-            style="@style/tab_menu_item"
-            android:drawableTop="@drawable/home_tab_message_selector"
-            android:text="吐槽中心" />
+        <!--<RadioButton-->
+            <!--android:id="@+id/home_rb_discuss"-->
+            <!--style="@style/tab_menu_item"-->
+            <!--android:drawableTop="@drawable/home_tab_message_selector"-->
+            <!--android:text="吐槽中心" />-->
 
-    </RadioGroup>
+    <!--</RadioGroup>-->
 
 
 </android.support.constraint.ConstraintLayout>

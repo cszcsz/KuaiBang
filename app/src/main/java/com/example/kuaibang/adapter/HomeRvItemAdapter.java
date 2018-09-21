@@ -15,8 +15,10 @@ import com.example.kuaibang.entity.HomeRvItem;
 import com.example.kuaibang.fragment.HomeMainFragment;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.datatype.BmobFile;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -31,7 +33,8 @@ public class HomeRvItemAdapter extends BaseQuickAdapter<Post,BaseViewHolder> {
         try{
             // 显示帖子结束时间
             SimpleDateFormat format = new SimpleDateFormat("HH:mm");
-            String dateTime = format.format(item.getEndTime());
+            Date date = new Date(BmobDate.getTimeStamp(item.getEndTime().getDate()));
+            String dateTime = format.format(date);
 
             if (item.getUser().getHead().getFileUrl()!=""){
                 Glide.with(IMApplication.getContext()).load(item.getUser().getHead().getFileUrl()).into((CircleImageView)helper.getView(R.id.home_rv_item_userImg));
@@ -56,7 +59,7 @@ public class HomeRvItemAdapter extends BaseQuickAdapter<Post,BaseViewHolder> {
                     .setText(R.id.home_rv_item_time,dateTime)
                     .setText(R.id.home_rv_item_userName,item.getUser().getTrueName());
         }catch (Exception e){
-            Log.i(TAG, e.getMessage());
+            e.printStackTrace();
         }
 
     }

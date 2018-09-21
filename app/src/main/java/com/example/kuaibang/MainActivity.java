@@ -3,6 +3,7 @@ package com.example.kuaibang;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -24,16 +25,18 @@ import cn.bmob.newim.listener.ConnectListener;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 
-public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener,View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = "MainActivity";
 
-    private RadioGroup rg_tab_bar;
-    private RadioButton rb_tab_help;
+//    private RadioGroup rg_tab_bar;
+//    private RadioButton rb_tab_help;
 
     private HomeMainFragment helpFragment;
     private HomeShareFragment shareFragment;
     private HomeDiscussFragment discussFragment;
+
+    private FloatingActionButton floatingActionButton;
 
     private Fragment currentFragment = new Fragment();
     private FragmentManager fragmentManager;
@@ -64,17 +67,19 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     @Override
     public void initView() {
         // 该函数专门用于初始化视图中的元素对象
-        rg_tab_bar = findViewById(R.id.home_rg_tab_bar);
-        rb_tab_help = findViewById(R.id.home_rb_help);
-        rb_tab_help.setChecked(true);
+//        rg_tab_bar = findViewById(R.id.home_rg_tab_bar);
+//        rb_tab_help = findViewById(R.id.home_rb_help);
+//        rb_tab_help.setChecked(true);
         myMessageBtn = findViewById(R.id.home_header_message_btn);
+        floatingActionButton = findViewById(R.id.home_main_floatBtn);
     }
 
     @Override
     public void initListeners() {
         // 该函数为视图中的元素设置事件监听器
-        rg_tab_bar.setOnCheckedChangeListener(this);
+//        rg_tab_bar.setOnCheckedChangeListener(this);
         myMessageBtn.setOnClickListener(this);
+        floatingActionButton.setOnClickListener(this);
     }
 
     @Override
@@ -85,8 +90,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     private void initFragment(){
         fragmentManager = getSupportFragmentManager();
         helpFragment = new HomeMainFragment();
-        shareFragment = new HomeShareFragment();
-        discussFragment = new HomeDiscussFragment();
+//        shareFragment = new HomeShareFragment();
+//        discussFragment = new HomeDiscussFragment();
     }
 
     private void showFragment(Fragment fragment){
@@ -102,20 +107,20 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         }
     }
 
-    @Override
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
-        switch (checkedId){
-            case R.id.home_rb_help:
-                showFragment(helpFragment);
-                break;
-            case R.id.home_rb_share:
-                showFragment(shareFragment);
-                break;
-            case R.id.home_rb_discuss:
-                showFragment(discussFragment);
-                break;
-        }
-    }
+//    @Override
+//    public void onCheckedChanged(RadioGroup group, int checkedId) {
+//        switch (checkedId){
+//            case R.id.home_rb_help:
+//                showFragment(helpFragment);
+//                break;
+//            case R.id.home_rb_share:
+//                showFragment(shareFragment);
+//                break;
+//            case R.id.home_rb_discuss:
+//                showFragment(discussFragment);
+//                break;
+//        }
+//    }
 
     @Override
     public void onClick(View v) {
@@ -123,7 +128,9 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             case R.id.home_header_message_btn:  // home页面头部工具栏左侧点击事件
                 MessageActivity.startMyActivity(MainActivity.this,"data1","data2");
                 break;
-            default:
+            case R.id.home_main_floatBtn:
+                ShowToast("进入发布帖子界面");
+                break;
         }
     }
 
