@@ -4,23 +4,16 @@
     <string name="home_tab_menu_share">资源分享</string>
     <string name="home_tab_menu_discuss">吐槽中心</string>
 
-    
+
     <string name="help_detail_title">求助详情</string>
 
     <string name="message_help_title">我的帮助</string>
     <string name="message_assist_title">我的求助</string>
     <string name="message_chat_title">我的消息</string>
-    
-    
-    
-    <!--个人中心-->
-    <string name="personal_center_title">个人中心</string>
-    <string name="my_experience">我的历程</string>
-    <string name="pesonal_information">个人资料</string>
-    <string name="settings">设置</string>
-    <string name="about">关于</string>
-    <string name="logout">退出</string>
 
+    <!--通用标题栏-->
+    <string name="backward">返回</string>
+    <string name="save">完成</string>
 
     <!--已帮助总结页面-->
     <string name="helped_summary_state">当前状态</string>
@@ -36,5 +29,60 @@
     <string name="assist_process_title">求助进程</string>
 
     <string name="chat_activity_title">我的消息</string>
+
+
+    <!--个人中心-->
+    <string name="personal_center_title">个人中心</string>
+    <string name="my_experience">我的历程</string>
+    <string name="pesonal_information">个人资料</string>
+    <string name="settings">设置</string>
+    <string name="about">关于</string>
+    <string name="logout">退出</string>
+
+    <!--我的历程-->
+    <string name="personal_experience_title">我的历程</string>
+
+    <!--个人资料-->
+    <string name="personal_info_title">个人资料</string>
+    <string name="personal_info_head">头像</string>
+    <string name="personal_info_introduce">个性签名</string>
+    <string name="personal_info_userid">ID</string>
+    <string name="personal_info_username">昵称</string>
+    <string name="personal_info_usersex">性别</string>
+    <string name="personal_info_phonenum">手机号</string>
+    <string name="personal_info_truename">姓名</string>
+    <string name="personal_info_studentid">学号</string>
+    <string name="personal_info_school">学校</string>
+    <string name="personal_info_college">学院</string>
+    <string name="personal_info_major">专业</string>
+    <string name="personal_info_grade">年级</string>
+
+
+    <!--设置页面-->
+    <string name="personal_settings_title">设置</string>
+    <string name="personal_settings_security">账号与安全</string>
+    <string name="personal_settings_notification">消息提醒</string>
+
+    <!--消息提醒页面-->
+    <string name="personal_notification_title">消息提醒</string>
+    <string name="personal_notification_newattention">接到新消息通知</string>
+    <string name="personal_notification_sound">声音</string>
+    <string name="personal_notification_vibration">振动</string>
+
+    <!--关于页面-->
+    <string name="personal_about_title">关于</string>
+    <string name="personal_about_version">版本号</string>
+    <string name="personal_about_software">关于快帮</string>
+    <string name="personal_about_feedback">我要吐槽</string>
+
+    <!--退出对话框-->
+    <string name="personal_logout_content">退出后将无法收到消息通知，确定退出？</string>
+    <string name="personal_logout_cancel">取消</string>
+    <string name="personal_logout_ensure">确定退出</string>
+
+    <!--更换头像对话框-->
+    <string name="personal_change_head_take">拍照</string>
+    <string name="personal_change_head_album">从相册选择</string>
+
 
 </resources>

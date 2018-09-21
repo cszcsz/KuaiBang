@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:background="@drawable/corner_rectangle_shape"
+    android:orientation="vertical">
+
+
+
+    <TextView
+        android:id="@+id/personal_change_head_take"
+        android:background="@drawable/background_shadow_selector"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/personal_change_head_take"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textColor="@color/personal_dialog_text"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:background="@color/divider_gray" />
+    <TextView
+        android:id="@+id/personal_change_head_album"
+        android:background="@drawable/background_shadow_selector"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/personal_change_head_album"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:textColor="@color/personal_dialog_text"
+        />
+
+
+
+
+</LinearLayout>

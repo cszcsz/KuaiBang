@@ -25,7 +25,6 @@ dependencies {
     implementation 'cn.bmob.android:bmob-sdk:3.6.3'
     implementation 'cn.bmob.android:bmob-push:0.8'
     implementation 'cn.bmob.android:bmob-im:2.1.0@aar'
-    implementation 'cn.bmob.android:bmob-sms:1.0.1'
     implementation 'cn.bmob.android:http-legacy:1.0'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
@@ -43,4 +42,5 @@ dependencies {
     implementation 'com.wang.avi:library:1.0.0'
     implementation 'com.nineoldandroids:library:2.4.0'
     implementation 'com.contrarywind:Android-PickerView:4.1.6'
+
 }

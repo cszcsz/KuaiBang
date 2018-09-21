@@ -9,8 +9,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <!--摄像头-->
     <uses-permission android:name="android.permission.CAMERA" />
@@ -19,34 +19,69 @@
 
 
     <application
-        android:name=".IMApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.example.kuaibang.PersonalInfoActivity"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
         <meta-data
             android:name="Bmob_APP_KEY"
             android:value="f5b5aa55b437ce14f1391d2f79b663c0" />
 
         <activity
             android:name=".MainActivity"
-            android:theme="@style/MyActivityTheme">
-
-        </activity>
+            android:theme="@style/MyActivityTheme"/>
         <activity
             android:name=".HelpDetailActivity"
-            android:theme="@style/MyActivityTheme">
-        </activity>
+            android:theme="@style/MyActivityTheme" />
         <activity
             android:name=".MessageActivity"
+            android:theme="@style/MyActivityTheme" />
+        <activity
+            android:name=".HelpedSummaryActivity"
+            android:theme="@style/MyActivityTheme" />
+        <activity
+            android:name=".PersonalCenterActivity"
             android:theme="@style/MyActivityTheme">
         </activity>
         <activity
-            android:name=".HelpedSummaryActivity"
-            android:theme="@style/MyActivityTheme">
+            android:name=".PersonalInfoActivity"
+            android:theme="@style/MyActivityTheme"/>
+        <activity
+            android:name=".PersonalInfoEditActivity"
+            android:theme="@style/MyActivityTheme"/>
+        <activity
+            android:name=".PersonalExperienceActivity"
+            android:theme="@style/MyActivityTheme"/>
+        <activity
+            android:name=".PersonalAboutActivity"
+            android:theme="@style/MyActivityTheme"/>
+        <activity
+            android:name=".PersonalSettingsActivity"
+            android:theme="@style/MyActivityTheme"/>
+        <activity
+            android:name=".PersonalNotificationActivity"
+            android:theme="@style/MyActivityTheme"/>
+        <activity
+            android:name=".SetInfoActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+
         <activity android:name=".AssistProcessActivity"
             android:theme="@style/MyActivityTheme">
         </activity>

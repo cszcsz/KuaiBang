@@ -1,0 +1,661 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/personal_bg_white"
+    tools:context=".PersonalInfoActivity">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/layout_title"/>
+
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <RelativeLayout
+            android:id="@+id/personal_info_head"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/background_shadow_selector"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:id="@+id/text_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:text="@string/personal_info_head"
+                android:textColor="@color/personal_text_gray"
+                android:textSize="13sp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/userhead_image"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/ic_userhead_girl" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_alignLeft="@+id/text_head"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/text_head"
+                android:background="@color/divider_gray" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/personal_info_introduce"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/background_shadow_selector"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:id="@+id/text_introduce"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:text="@string/personal_info_introduce"
+                android:textColor="@color/personal_text_gray"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/personal_info_introduce_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/detail_introduce"
+                android:layout_toStartOf="@+id/detail_introduce"
+                android:maxLines="1"
+                android:text="人生如一场戏"
+                android:textColor="@color/personal_info_text_gray"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:id="@+id/detail_introduce"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/ic_detail" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_alignLeft="@+id/text_introduce"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/text_introduce"
+                android:background="@color/divider_gray" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/personal_info_id"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/background_shadow_selector"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:id="@+id/text_userid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:text="@string/personal_info_userid"
+                android:textColor="@color/personal_text_gray"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/personal_info_userid_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="40dp"
+                android:layout_marginRight="40dp"
+                android:text="5678273"
+                android:textColor="@color/personal_info_text_gray"
+                android:textSize="13sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_alignLeft="@+id/text_userid"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/text_userid"
+                android:background="@color/divider_gray" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/personal_info_username"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/background_shadow_selector"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:id="@+id/text_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:text="@string/personal_info_username"
+                android:textColor="@color/personal_text_gray"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/personal_info_username_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/detail_username"
+                android:layout_toStartOf="@+id/detail_username"
+                android:text="丹丹小宝贝"
+                android:textColor="@color/personal_info_text_gray"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:id="@+id/detail_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/ic_detail" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_alignLeft="@+id/text_username"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/text_username"
+                android:background="@color/divider_gray" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/personal_info_usersex"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/background_shadow_selector"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:id="@+id/text_usersex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:text="@string/personal_info_usersex"
+                android:textColor="@color/personal_text_gray"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/personal_info_usersex_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/detail_usersex"
+                android:layout_toStartOf="@+id/detail_usersex"
+                android:text="女"
+                android:textColor="@color/personal_info_text_gray"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:id="@+id/detail_usersex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/ic_detail" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_alignLeft="@+id/text_usersex"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/text_usersex"
+                android:background="@color/divider_gray" />
+
+        </RelativeLayout>
+
+        <!--<RelativeLayout-->
+        <!--android:id="@+id/personal_info_phonenum"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:background="@color/personal_bar_white"-->
+        <!--android:clickable="true"-->
+        <!--android:focusable="true">-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/text_phonenum"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:layout_marginStart="10dp"-->
+        <!--android:text="@string/personal_info_phonenum"-->
+        <!--android:textColor="@color/personal_text_gray"-->
+        <!--android:textSize="13sp" />-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/personal_info_phonenum_text"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_marginEnd="10dp"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:layout_toLeftOf="@+id/detail_phonenum"-->
+        <!--android:layout_toStartOf="@+id/detail_phonenum"-->
+        <!--android:text="17854206922"-->
+        <!--android:textColor="@color/personal_info_text_gray"-->
+        <!--android:textSize="13sp" />-->
+
+        <!--<ImageView-->
+        <!--android:id="@+id/detail_phonenum"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_marginEnd="10dp"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:src="@mipmap/ic_detail" />-->
+
+        <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0.5dp"-->
+        <!--android:layout_alignLeft="@+id/text_phonenum"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignStart="@+id/text_phonenum"-->
+        <!--android:background="@color/divider_gray" />-->
+
+        <!--</RelativeLayout>-->
+
+        <RelativeLayout
+            android:id="@+id/personal_info_truename"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/background_shadow_selector"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:id="@+id/text_truename"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:text="@string/personal_info_truename"
+                android:textColor="@color/personal_text_gray"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/personal_info_truename_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/detail_truename"
+                android:layout_toStartOf="@+id/detail_truename"
+                android:text="牟丹"
+                android:textColor="@color/personal_info_text_gray"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:id="@+id/detail_truename"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/ic_detail" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_alignLeft="@+id/text_truename"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/text_truename"
+                android:background="@color/divider_gray" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/personal_info_studentid"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/background_shadow_selector"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:id="@+id/text_studentid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:text="@string/personal_info_studentid"
+                android:textColor="@color/personal_text_gray"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/personal_info_studentid_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/detail_studentid"
+                android:layout_toStartOf="@+id/detail_studentid"
+                android:text="1607010405"
+                android:textColor="@color/personal_info_text_gray"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:id="@+id/detail_studentid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/ic_detail" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_alignLeft="@+id/text_studentid"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/text_studentid"
+                android:background="@color/divider_gray" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/personal_info_school"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/background_shadow_selector"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:id="@+id/text_school"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:text="@string/personal_info_school"
+                android:textColor="@color/personal_text_gray"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/personal_info_school_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/detail_school"
+                android:layout_toStartOf="@+id/detail_school"
+                android:text="中国石油大学(华东)"
+                android:textColor="@color/personal_info_text_gray"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:id="@+id/detail_school"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/ic_detail" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_alignLeft="@+id/text_school"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/text_school"
+                android:background="@color/divider_gray" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/personal_info_college"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/background_shadow_selector"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:id="@+id/text_college"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:text="@string/personal_info_college"
+                android:textColor="@color/personal_text_gray"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/personal_info_college_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/detail_college"
+                android:layout_toStartOf="@+id/detail_college"
+                android:text="计算机与通信工程学院"
+                android:textColor="@color/personal_info_text_gray"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:id="@+id/detail_college"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/ic_detail" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_alignLeft="@+id/text_college"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/text_college"
+                android:background="@color/divider_gray" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/personal_info_major"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/background_shadow_selector"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:id="@+id/text_major"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:text="@string/personal_info_major"
+                android:textColor="@color/personal_text_gray"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/personal_info_major_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/detail_major"
+                android:layout_toStartOf="@+id/detail_major"
+                android:text="计算机科学与技术"
+                android:textColor="@color/personal_info_text_gray"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:id="@+id/detail_major"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/ic_detail" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_alignLeft="@+id/text_major"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/text_major"
+                android:background="@color/divider_gray" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/personal_info_grade"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/background_shadow_selector"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:id="@+id/text_grade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:text="@string/personal_info_grade"
+                android:textColor="@color/personal_text_gray"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/personal_info_grade_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/detail_grade"
+                android:layout_toStartOf="@+id/detail_grade"
+                android:text="2016级"
+                android:textColor="@color/personal_info_text_gray"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:id="@+id/detail_grade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/ic_detail" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_alignLeft="@+id/text_grade"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/text_grade"
+                android:background="@color/divider_gray" />
+
+        </RelativeLayout>
+
+    <!--</ScrollView>-->
+
+</LinearLayout>

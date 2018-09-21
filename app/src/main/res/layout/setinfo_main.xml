@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/personal_bg_white">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/layout_title"/>
+
+    <EditText
+        android:id="@+id/username_set_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:background="@color/personal_bar_white"
+        android:hint="昵称"
+        android:textSize="18sp"
+        android:textColor="@color/personal_text_black"
+        android:padding="15dp"
+        />
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10">
+        
+        <ImageButton
+            android:id="@+id/sex_man"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/personal_bg_white"
+            android:src="@drawable/sex_man_selector"
+            android:layout_margin="5dp"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <ImageButton
+            android:id="@+id/sex_woman"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/personal_bg_white"
+            android:src="@drawable/sex_woman_selector"
+            android:layout_margin="5dp"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:focusable="true"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/set_info_continue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
+        android:text="继续"
+        android:textSize="20sp"
+        android:textColor="@color/home_text_white"
+        android:background="@drawable/corner_rectangle_shape"
+        />
+
+
+
+</LinearLayout>
