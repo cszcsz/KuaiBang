@@ -31,6 +31,12 @@ public abstract class TitleActivity extends BaseActivity{
         mTitleTextView.setText(titleId);
     }
 
+
+    public void setTitle(String title) {
+        mTitleTextView.setText(title);
+    }
+
+
     public void onClickBack(View view) {
             finish();
     }

@@ -1,22 +1,32 @@
 package com.example.kuaibang;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.example.kuaibang.entity.MyUser;
 import com.example.kuaibang.fragment.HomeDiscussFragment;
 import com.example.kuaibang.fragment.HomeMainFragment;
 import com.example.kuaibang.fragment.HomeShareFragment;
 import com.jaeger.library.StatusBarUtil;
 
+import cn.bmob.newim.BmobIM;
+import cn.bmob.newim.listener.ConnectListener;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.exception.BmobException;
+
 public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener,View.OnClickListener {
+
+    private static final String TAG = "MainActivity";
 
     private RadioGroup rg_tab_bar;
     private RadioButton rb_tab_help;
@@ -40,6 +50,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         initListeners();
         initFragment();
         showFragment(helpFragment);
+
+        connectBmobIMService(); // 连接Bmob即时聊天服务器
     }
 
     @Override
@@ -124,5 +136,26 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         } else {
             finish();
         }
+    }
+
+    private void connectBmobIMService(){
+        // 第一个参数传入本用户的唯一标识id
+        MyUser user = BmobUser.getCurrentUser(MyUser.class);
+        BmobIM.connect(user.getObjectId(), new ConnectListener() {
+            @Override
+            public void done(String s, BmobException e) {
+                if(e==null){
+                    Log.i(TAG, "连接服务器成功!!!!");
+                }else {
+                    Log.i(TAG, "连接出错，打印的消息为："+e.getMessage() + " " + e.getErrorCode());
+                }
+            }
+        });
+    }
+
+    public static void startMyActivity(Context context, String para){
+        Intent intent = new Intent(context,MainActivity.class);
+        intent.putExtra("param",para);
+        context.startActivity(intent);
     }
 }

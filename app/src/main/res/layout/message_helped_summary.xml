@@ -162,7 +162,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView25" />
 
     <TextView
-        android:id="@+id/textView27"
+        android:id="@+id/login_findPwd_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="36dp"
@@ -180,8 +180,8 @@
         android:layout_marginStart="56dp"
         android:text="3小时25分"
         android:textColor="@color/home_bg_black"
-        app:layout_constraintStart_toEndOf="@+id/textView27"
-        app:layout_constraintTop_toTopOf="@+id/textView27" />
+        app:layout_constraintStart_toEndOf="@+id/login_findPwd_textView"
+        app:layout_constraintTop_toTopOf="@+id/login_findPwd_textView" />
 
     <TextView
         android:id="@+id/helped_summary_state_persons"
@@ -192,7 +192,7 @@
         android:layout_marginTop="12dp"
         android:text="@string/helped_summary_persons"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView27" />
+        app:layout_constraintTop_toBottomOf="@+id/login_findPwd_textView" />
 
     <TextView
         android:id="@+id/textView30"

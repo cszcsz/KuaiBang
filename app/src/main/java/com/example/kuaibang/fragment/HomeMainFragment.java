@@ -23,24 +23,53 @@ import com.example.kuaibang.HelpDetailActivity;
 import com.example.kuaibang.MainActivity;
 import com.example.kuaibang.R;
 import com.example.kuaibang.adapter.HomeRvItemAdapter;
+import com.example.kuaibang.entity.HomeRvItem;
+import com.example.kuaibang.entity.MyUser;
+import com.example.kuaibang.entity.Post;
 import com.example.kuaibang.entity.Test;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.bmob.newim.bean.BmobIMMessage;
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobDate;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.QueryListener;
+import cn.bmob.v3.listener.SaveListener;
 
 public class HomeMainFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private RefreshLayout refreshLayout;
-    private List<Test> datas;
+    private List<Post> datas;
     private HomeRvItemAdapter adapter;
+
+    private static final String TAG = "HomeMainFragment";
+
+    List<Post> moreDatas;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        BmobQuery<MyUser> query = new BmobQuery<>();
+        query.getObject("3a90cdd344", new QueryListener<MyUser>() {
+            @Override
+            public void done(MyUser myUser, BmobException e) {
+                if (e == null) {
+                    Log.i(TAG, myUser.getHead().getFileUrl());
+                } else {
+                    Log.i(TAG, e.getMessage());
+                }
+            }
+        });
     }
 
     @Nullable
@@ -51,14 +80,9 @@ public class HomeMainFragment extends Fragment {
         recyclerView = view.findViewById(R.id.home_recycle_view);
         refreshLayout = view.findViewById(R.id.home_refresh_layout);
         datas = new ArrayList<>();
-        Test testData;
-        int i;
-        for (i = 0; i < 5; i++) {
-            testData = new Test();
-            testData.setTitle("我是第" + i + "条标题");
-            testData.setContent("第" + i + "条内容");
-            datas.add(testData);
-        }
+//        initializeMainData();
+
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
@@ -69,12 +93,8 @@ public class HomeMainFragment extends Fragment {
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                if(ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_PHONE_STATE)!= PackageManager.PERMISSION_GRANTED){
-                    ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.READ_PHONE_STATE},1);
-                }else {
-                    beginHelpDetailActivity();
-                }
-//                Toast.makeText(getContext(),"你点击了第"+(position+1)+"条求助帖",Toast.LENGTH_SHORT).show();
+                beginHelpDetailActivity();
+//              Toast.makeText(getContext(),"你点击了第"+(position+1)+"条求助帖",Toast.LENGTH_SHORT).show();
             }
         });
         // 为rv中每个item条目下面的子控件设置点击事件
@@ -90,10 +110,10 @@ public class HomeMainFragment extends Fragment {
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                List<Test> newDatas = new ArrayList<>();
-                Test newData;
+                List<Post> newDatas = new ArrayList<>();
+                Post newData;
                 for (int i=0;i<5;i++){
-                    newData = new Test();
+                    newData = new Post();
                     newData.setTitle("哈哈，我是新的第"+i+"条标题");
                     newData.setContent("呵呵，我是新的第" + i + "条内容");
                     newDatas.add(newData);
@@ -105,16 +125,21 @@ public class HomeMainFragment extends Fragment {
         refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                List<Test> moreDatas = new ArrayList<>();
-                Test moreData;
-                for (int i=0;i<4;i++){
-                    moreData = new Test();
-                    moreData.setTitle("我是第"+i+"条标题");
-                    moreData.setContent("第" + i + "条内容");
-                    moreDatas.add(moreData);
-                }
-                adapter.getData().addAll(moreDatas);
-                adapter.notifyDataSetChanged();
+                moreDatas = new ArrayList<>();
+                BmobQuery<Post> query = new BmobQuery<>();
+                query.include("user");
+                query.findObjects(new FindListener<Post>() {
+                    @Override
+                    public void done(List<Post> list, BmobException e) {
+                        if (e==null){
+                            adapter.getData().addAll(list);
+                            adapter.notifyDataSetChanged();
+                        }else {
+                            Toast.makeText(getContext(),"获取数据失败",Toast.LENGTH_SHORT).show();
+                            Log.i(TAG,e.getMessage());
+                        }
+                    }
+                });
                 refreshLayout.finishLoadMore(1000);
             }
         });
@@ -134,18 +159,31 @@ public class HomeMainFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode){
-            case 1:
-                if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
-                    beginHelpDetailActivity();
-                }else {
-                    Toast.makeText(getContext(),"你拒绝了授予权限",Toast.LENGTH_SHORT).show();
+
+
+    private void initializeMainData(){
+        BmobQuery<Post> query = new BmobQuery<Post>();
+//        //查询playerName叫“比目”的数据
+//        query.addWhereEqualTo("playerName", "比目");
+//        //返回50条数据，如果不加上这条语句，默认返回10条数据
+//        query.setLimit(50)
+        query.findObjects(new FindListener<Post>() {
+            @Override
+            public void done(List<Post> list, BmobException e) {
+                if (e==null){
+                    Log.i(TAG, "查询初始帖子数据成功!");
+                }else{
+                    Toast.makeText(getContext(),"初始化数据失败",Toast.LENGTH_SHORT).show();
+                    Log.i(TAG, e.getMessage());
                 }
-                break;
-            default:
-                break;
-        }
+            }
+        });
     }
+
+    private void createFakeData(){
+        Post post = new Post();
+    }
+
+
+
 }

@@ -35,4 +35,6 @@
 
     <string name="assist_process_title">求助进程</string>
 
+    <string name="chat_activity_title">我的消息</string>
+
 </resources>

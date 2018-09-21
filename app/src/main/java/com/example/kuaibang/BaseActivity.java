@@ -25,7 +25,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.d(TAG, getClass().getSimpleName());
 
-        Bmob.initialize(this, Constants.Bmob_APPID);
+       // Bmob.initialize(this, Constants.Bmob_APPID);
 
         // 获取当前手机的屏幕信息
         DisplayMetrics metric = new DisplayMetrics();

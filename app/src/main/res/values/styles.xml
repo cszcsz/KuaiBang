@@ -25,4 +25,14 @@
         <item name="android:textSize">8sp</item>
     </style>
 
+
+    <style name="MyEditText" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@android:color/darker_gray</item>
+        <item name="colorControlActivated">@color/header_bar_yellow</item>
+    </style>
+
+
+    <!--<style name="MyCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">-->
+        <!--<item name="android:button">@drawable/checkbox_style</item>-->
+    <!--</style>-->
 </resources>
