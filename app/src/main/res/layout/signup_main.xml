@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/title_bar"
+        layout="@layout/layout_title"></include>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/circleImageView"
+        android:layout_width="80dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:src="@mipmap/ic_userhead_boy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_bar" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/signup_phone_layout"
+        android:theme="@style/MyEditText"
+        android:layout_width="276dp"
+        android:layout_height="50dp"
+        android:layout_margin="@dimen/dp_10"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view3"
+        app:errorEnabled="true"
+        app:counterMaxLength = "11">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/signUp_phoneNumber_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入手机号"
+            android:inputType="number"
+            android:textSize="16sp"
+            android:maxLength="11"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInput_layout"
+        android:layout_width="218dp"
+        android:layout_height="50dp"
+        android:layout_margin="@dimen/dp_10"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="20dp"
+        android:theme="@style/MyEditText"
+        app:layout_constraintEnd_toStartOf="@+id/signUp_getVerifyCode_btn"
+        app:layout_constraintStart_toStartOf="@+id/signup_phone_layout"
+        app:layout_constraintTop_toBottomOf="@+id/signup_phone_layout">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/signUp_verifyCode_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入验证码"
+            android:inputType="text"
+            android:maxLength="10"
+            android:textSize="16sp" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/signup_password1_layout"
+        android:layout_width="276dp"
+        android:layout_height="50dp"
+        android:layout_margin="@dimen/dp_10"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:theme="@style/MyEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInput_layout">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/signUp_password_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入新密码"
+            android:inputType="textPassword"
+            android:textSize="16sp"
+            android:maxLength="20"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/signup_password2_layout"
+        android:layout_width="276dp"
+        android:layout_height="50dp"
+        android:layout_margin="@dimen/dp_10"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:theme="@style/MyEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_password1_layout">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/signUp_verifyPassWord_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请确认密码"
+            android:inputType="textPassword"
+            android:textSize="16sp"
+            android:maxLength="20"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/signUp_getVerifyCode_btn"
+        android:layout_width="81dp"
+        android:layout_height="31dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/shape_circle_corner"
+        android:text="获取"
+        android:textColor="@color/home_bg_white"
+        android:textSize="@dimen/sp_14"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textInput_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textInput_layout" />
+
+    <Button
+        android:id="@+id/signUp_confirm_btn"
+        android:layout_width="212dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/shape_circle_corner"
+        android:text="注册"
+        android:textColor="@color/home_bg_white"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_password2_layout" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="103dp"
+        android:layout_height="31dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/circleImageView" />
+
+
+</android.support.constraint.ConstraintLayout>
