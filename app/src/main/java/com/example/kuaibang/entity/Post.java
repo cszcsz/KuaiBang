@@ -16,8 +16,8 @@ public class Post extends BmobObject {
     private String region;
     private String address;
     private Integer score;
-    private Date endTime;
-    private Date completeTime;
+    private BmobDate endTime;
+    private BmobDate completeTime;
     private Integer helperNum;
 
 
@@ -86,19 +86,19 @@ public class Post extends BmobObject {
         this.helperNum = helperNum;
     }
 
-    public Date getEndTime() {
+    public BmobDate getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(BmobDate endTime) {
         this.endTime = endTime;
     }
 
-    public Date getCompleteTime() {
+    public BmobDate getCompleteTime() {
         return completeTime;
     }
 
-    public void setCompleteTime(Date completeTime) {
+    public void setCompleteTime(BmobDate completeTime) {
         this.completeTime = completeTime;
     }
 }

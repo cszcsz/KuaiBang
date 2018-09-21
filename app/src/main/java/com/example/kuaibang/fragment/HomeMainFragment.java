@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.newim.bean.BmobIMMessage;
+import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobDate;
@@ -49,27 +50,14 @@ public class HomeMainFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private RefreshLayout refreshLayout;
-    private List<Post> datas;
     private HomeRvItemAdapter adapter;
+    private List<Post> datas;
 
     private static final String TAG = "HomeMainFragment";
-
-    List<Post> moreDatas;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        BmobQuery<MyUser> query = new BmobQuery<>();
-        query.getObject("3a90cdd344", new QueryListener<MyUser>() {
-            @Override
-            public void done(MyUser myUser, BmobException e) {
-                if (e == null) {
-                    Log.i(TAG, myUser.getHead().getFileUrl());
-                } else {
-                    Log.i(TAG, e.getMessage());
-                }
-            }
-        });
     }
 
     @Nullable
@@ -79,22 +67,47 @@ public class HomeMainFragment extends Fragment {
         View view = inflater.inflate(R.layout.home_main_fg,container,false);
         recyclerView = view.findViewById(R.id.home_recycle_view);
         refreshLayout = view.findViewById(R.id.home_refresh_layout);
+
         datas = new ArrayList<>();
-//        initializeMainData();
+        BmobQuery<Post> query = new BmobQuery<>();
+        query.include("user");
+        query.setLimit(10);
+        query.order("-createdAt");
+        query.findObjects(new FindListener<Post>() {
+            @Override
+            public void done(List<Post> list, BmobException e) {
+                if (e==null){
+                    for (int i=0;i<list.size();i++){
+                        datas.add(list.get(i));
+                    }
+                    Log.i(TAG, "查询初始帖子数据成功!");
+                }else{
+                    Toast.makeText(getContext(),"初始化数据失败",Toast.LENGTH_SHORT).show();
+                    Log.i(TAG, e.getMessage());
+                }
+                initializeAdapter();
+            }
+        });
 
+        return view;
+    }
 
+    private void initializeAdapter(){
+
+        adapter = new HomeRvItemAdapter(R.layout.home_rv_item,datas);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new HomeRvItemAdapter(R.layout.home_rv_item,datas);
+
+        adapter.openLoadAnimation();
+        recyclerView.setAdapter(adapter);
 
         // 为rv中的每个item条目设置点击事件
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 beginHelpDetailActivity();
-//              Toast.makeText(getContext(),"你点击了第"+(position+1)+"条求助帖",Toast.LENGTH_SHORT).show();
             }
         });
         // 为rv中每个item条目下面的子控件设置点击事件
@@ -110,22 +123,21 @@ public class HomeMainFragment extends Fragment {
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                List<Post> newDatas = new ArrayList<>();
-                Post newData;
-                for (int i=0;i<5;i++){
-                    newData = new Post();
-                    newData.setTitle("哈哈，我是新的第"+i+"条标题");
-                    newData.setContent("呵呵，我是新的第" + i + "条内容");
-                    newDatas.add(newData);
-                }
-                adapter.setNewData(newDatas);
+//                List<Post> newDatas = new ArrayList<>();
+//                Post newData;
+//                for (int i=0;i<5;i++){
+//                    newData = new Post();
+//                    newData.setTitle("哈哈，我是新的第"+i+"条标题");
+//                    newData.setContent("呵呵，我是新的第" + i+ "条内容");
+//                    newDatas.add(newData);
+//                }
+//                adapter.setNewData(newDatas);
                 refreshLayout.finishRefresh(1000); // 第一个参数表示延时时间，第二个参数若传入false表示刷新失败
             }
         });
         refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                moreDatas = new ArrayList<>();
                 BmobQuery<Post> query = new BmobQuery<>();
                 query.include("user");
                 query.findObjects(new FindListener<Post>() {
@@ -144,12 +156,8 @@ public class HomeMainFragment extends Fragment {
             }
         });
 
-
-        adapter.openLoadAnimation();
-        recyclerView.setAdapter(adapter);
-
-        return view;
     }
+
 
     private void beginHelpDetailActivity(){
         try{
@@ -162,15 +170,14 @@ public class HomeMainFragment extends Fragment {
 
 
     private void initializeMainData(){
-        BmobQuery<Post> query = new BmobQuery<Post>();
-//        //查询playerName叫“比目”的数据
-//        query.addWhereEqualTo("playerName", "比目");
-//        //返回50条数据，如果不加上这条语句，默认返回10条数据
-//        query.setLimit(50)
+        BmobQuery<Post> query = new BmobQuery<>();
+        query.include("user");
+        query.setLimit(10);
         query.findObjects(new FindListener<Post>() {
             @Override
             public void done(List<Post> list, BmobException e) {
                 if (e==null){
+                    datas = list;
                     Log.i(TAG, "查询初始帖子数据成功!");
                 }else{
                     Toast.makeText(getContext(),"初始化数据失败",Toast.LENGTH_SHORT).show();
@@ -182,6 +189,24 @@ public class HomeMainFragment extends Fragment {
 
     private void createFakeData(){
         Post post = new Post();
+        post.setContent("我在南教急需一个充电宝");
+        post.setTitle("充电宝急需");
+        post.setUser(BmobUser.getCurrentUser(MyUser.class));
+        post.setRegion("南教");
+        post.setState(1);
+        post.setAddress("南教201");
+        post.setHelperNum(2);
+        post.setScore(100);
+        post.save(new SaveListener<String>() {
+            @Override
+            public void done(String s, BmobException e) {
+                if (e==null){
+                    Log.i(TAG, "存储假数据成功");
+                }else {
+                    Log.i(TAG, e.getMessage());
+                }
+            }
+        });
     }
 
 
