@@ -9,6 +9,12 @@ import cn.bmob.v3.datatype.BmobDate;
 
 public class Post extends BmobObject {
 
+    public static final int HELPS_STATE = 1;    // 待帮助状态
+    public static final int HELPING_STATE = 2;  // 正在帮助状态
+    public static final int HELPED_STATE = 0;   // 已帮助状态
+    public static final int INVALID_STATE = -1;   // 已失效状态
+
+
     private MyUser user;
     private Integer state;
     private String title;

@@ -16,31 +16,31 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/assist_helping_item_person"
+            android:id="@+id/assist_helped_item_person"
             android:layout_width="wrap_content"
             android:layout_height="12dp"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="1dp"
-            android:text="3"
+            android:text="1"
             android:textSize="10sp"
             app:layout_constraintStart_toEndOf="@+id/imageView13"
             app:layout_constraintTop_toTopOf="@+id/imageView13" />
 
         <TextView
-            android:id="@+id/assist_helping_item_title"
+            android:id="@+id/assist_helped_item_title"
             android:layout_width="86dp"
             android:layout_height="18dp"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="充电宝急需"
+            android:text="卫生纸急需"
             android:textColor="@color/home_bg_black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/assist_helping_item_content"
+            android:id="@+id/assist_helped_item_content"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -50,10 +50,10 @@
             android:layout_marginTop="8dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="我在南教急需一个充电宝，希望有的同学能帮我下~"
+            android:text="我在图书馆三楼急需一包卫生纸，希望有的同学可以借我下……"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/assist_helping_item_title" />
+            app:layout_constraintTop_toBottomOf="@+id/assist_helped_item_title" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -61,64 +61,37 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/assist_helping_item_time"
-            android:layout_width="wrap_content"
-            android:layout_height="12dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="2dp"
-            android:gravity="center"
-            android:text="00:03:30"
-            android:textSize="11sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView15"
-            app:layout_constraintTop_toTopOf="@+id/imageView15"
-            app:layout_constraintVertical_bias="0.0" />
-
         <ImageView
             android:id="@+id/imageView13"
             android:layout_width="23dp"
             android:layout_height="17dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/assist_helping_item_content"
-            app:srcCompat="@mipmap/ic_team" />
-
-        <ImageView
-            android:id="@+id/imageView15"
-            android:layout_width="22dp"
-            android:layout_height="16dp"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView13"
-            app:srcCompat="@mipmap/ic_shalou" />
+            app:layout_constraintTop_toBottomOf="@+id/assist_helped_item_content"
+            app:srcCompat="@mipmap/ic_team" />
 
         <TextView
-            android:id="@+id/assist_helping_item_stateText"
-            android:layout_width="67dp"
+            android:id="@+id/assist_helped_item_stateText"
+            android:layout_width="wrap_content"
             android:layout_height="15dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
             android:layout_marginTop="2dp"
-            android:text="正在接受帮助"
+            android:text="已完成"
             android:textColor="@color/home_bg_black"
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/assist_helping_item_stateImg"
+            app:layout_constraintTop_toTopOf="@+id/assist_helped_item_stateImg"
             app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
-            android:id="@+id/assist_helping_item_more"
+            android:id="@+id/assist_helped_item_more"
             android:layout_width="29dp"
             android:layout_height="20dp"
             android:layout_marginEnd="8dp"
@@ -129,42 +102,29 @@
             app:srcCompat="@mipmap/ic_more" />
 
         <ImageView
-            android:id="@+id/assist_helping_item_stateImg"
+            android:id="@+id/assist_helped_item_stateImg"
             android:layout_width="22dp"
             android:layout_height="20dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
+            android:layout_marginTop="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/assist_helping_item_stateText"
-            app:srcCompat="@mipmap/ic_flash2" />
+            app:layout_constraintEnd_toStartOf="@+id/assist_helped_item_stateText"
+            app:layout_constraintTop_toBottomOf="@+id/assist_helped_item_content"
+            app:srcCompat="@mipmap/ic_compelted" />
 
         <TextView
-            android:id="@+id/textView27"
-            android:layout_width="wrap_content"
-            android:layout_height="11dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="1dp"
-            android:text="结束"
-            android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="@+id/assist_helping_item_time"
-            app:layout_constraintStart_toEndOf="@+id/assist_helping_item_time"
-            app:layout_constraintTop_toTopOf="@+id/assist_helping_item_time"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <TextView
-            android:id="@+id/textView29"
+            android:id="@+id/textView28"
             android:layout_width="wrap_content"
             android:layout_height="11dp"
             android:layout_marginLeft="2dp"
             android:layout_marginStart="2dp"
             android:text="人"
             android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="@+id/assist_helping_item_person"
-            app:layout_constraintStart_toEndOf="@+id/assist_helping_item_person"
-            app:layout_constraintTop_toTopOf="@+id/assist_helping_item_person"
-            app:layout_constraintVertical_bias="0.8" />
+            app:layout_constraintBottom_toBottomOf="@+id/assist_helped_item_person"
+            app:layout_constraintStart_toEndOf="@+id/assist_helped_item_person"
+            app:layout_constraintTop_toTopOf="@+id/assist_helped_item_person" />
 
     </android.support.constraint.ConstraintLayout>
 

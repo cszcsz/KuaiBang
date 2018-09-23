@@ -4,17 +4,26 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.Toast;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import cn.bmob.v3.b.This;
+import com.bumptech.glide.Glide;
+import com.example.kuaibang.entity.Picture;
+
+import java.util.List;
+
+import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class HelpDetailActivity extends TitleActivity implements View.OnClickListener {
@@ -26,16 +35,37 @@ public class HelpDetailActivity extends TitleActivity implements View.OnClickLis
     private Button concelBtn;
     private EditText editText;
 
+    private CircleImageView circleImageView;
+    private TextView userName;
+    private ImageView userSex;
+    private TextView userCredit;
+    private TextView postScore;
+    private TextView postHelerNum;
+    private TextView postAddress;
+    private TextView postEndTime;
+    private TextView postContnt;
+
+    private ImageView postImg1;
+    private ImageView postImg2;
+    private ImageView postImg3;
+
+    private String postId;
+    
     boolean helpBtnIsShow = true;
+    private static final String TAG = "HelpDetailActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        helpBtnIsShow = getIntent().getBooleanExtra("showBtn",true);
+        Intent intent = getIntent();
+        Bundle bundle = intent.getBundleExtra("data");
+        helpBtnIsShow = bundle.getBoolean("isShowBtn");
         setContentView();
         initView();
         initListeners();
         initData();
+        getIntentData();
+        initializePostImg();
     }
 
     @Override
@@ -50,6 +80,18 @@ public class HelpDetailActivity extends TitleActivity implements View.OnClickLis
         if(!helpBtnIsShow){
             helpBtn.setVisibility(View.GONE);
         }
+        circleImageView = findViewById(R.id.help_detail_userhead);
+        userName = findViewById(R.id.help_detail_user_name);
+        userSex = findViewById(R.id.help_detail_user_sexsymbol);
+        userCredit = findViewById(R.id.help_detail_user_credit);
+        postScore = findViewById(R.id.help_detail_score);
+        postHelerNum = findViewById(R.id.help_detail_persons);
+        postAddress = findViewById(R.id.help_detail_location);
+        postEndTime = findViewById(R.id.help_detail_time);
+        postContnt = findViewById(R.id.help_detail_content);
+        postImg1 = findViewById(R.id.help_detail_img1);
+        postImg2 = findViewById(R.id.help_detail_img2);
+        postImg3 = findViewById(R.id.help_detail_img3);
     }
 
     @Override
@@ -78,6 +120,58 @@ public class HelpDetailActivity extends TitleActivity implements View.OnClickLis
             default:
         }
     }
+
+    private void getIntentData(){
+        Intent intent = getIntent();
+        Bundle bundle = intent.getBundleExtra("data");
+        Glide.with(HelpDetailActivity.this).load(bundle.getString("userHead")).into((CircleImageView)findViewById(R.id.help_detail_userhead));
+        if(bundle.getBoolean("userSex")==true){
+            userSex.setImageResource(R.mipmap.ic_boy_symbol);
+        }else {
+            userSex.setImageResource(R.mipmap.ic_girl_symbol);
+        }
+        userName.setText(bundle.getString("userName"));
+        userCredit.setText(bundle.getString("userCredit"));
+        postScore.setText(bundle.getString("postScore"));
+        postHelerNum.setText(bundle.getString("postHelperNum"));
+        postAddress.setText(bundle.getString("postAddress"));
+        postEndTime.setText(bundle.getString("postEndTime"));
+        postContnt.setText(bundle.getString("postContent"));
+        postId = bundle.getString("postId");
+
+    }
+
+    private void initializePostImg(){
+        BmobQuery<Picture> query = new BmobQuery<>();
+        query.addWhereEqualTo("post",postId);
+        Log.i(TAG, "initializePostImg: "+postId);
+        query.findObjects(new FindListener<Picture>() {
+            @Override
+            public void done(List<Picture> list, BmobException e) {
+                if (e==null){
+                    Log.i(TAG, String.valueOf(list.size()));
+                    switch (list.size()){
+                        case 1:
+                            Glide.with(HelpDetailActivity.this).load(list.get(0).getImg().getFileUrl()).into((ImageView) findViewById(R.id.help_detail_img1));
+                            break;
+                        case 2:
+                            Glide.with(HelpDetailActivity.this).load(list.get(0).getImg().getFileUrl()).into((ImageView) findViewById(R.id.help_detail_img1));
+                            Glide.with(HelpDetailActivity.this).load(list.get(1).getImg().getFileUrl()).into((ImageView) findViewById(R.id.help_detail_img2));
+                            break;
+                        case 3:
+                            Glide.with(HelpDetailActivity.this).load(list.get(0).getImg().getFileUrl()).into((ImageView) findViewById(R.id.help_detail_img1));
+                            Glide.with(HelpDetailActivity.this).load(list.get(1).getImg().getFileUrl()).into((ImageView) findViewById(R.id.help_detail_img2));
+                            Glide.with(HelpDetailActivity.this).load(list.get(2).getImg().getFileUrl()).into((ImageView) findViewById(R.id.help_detail_img3));
+                            break;
+                    }
+                    Log.i(TAG, "查询帖子对应的图片信息成功");
+                }else {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
 
     private void showDialog(){
         dialog = new Dialog(this);

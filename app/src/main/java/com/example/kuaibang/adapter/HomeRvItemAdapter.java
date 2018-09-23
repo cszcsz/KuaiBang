@@ -57,7 +57,7 @@ public class HomeRvItemAdapter extends BaseQuickAdapter<Post,BaseViewHolder> {
                     .setText(R.id.home_rv_item_location,item.getRegion())
                     .setText(R.id.home_rv_item_score,Integer.toString(item.getScore()))
                     .setText(R.id.home_rv_item_time,dateTime)
-                    .setText(R.id.home_rv_item_userName,item.getUser().getTrueName());
+                    .setText(R.id.home_rv_item_userName,item.getUser().getUserName());
         }catch (Exception e){
             e.printStackTrace();
         }

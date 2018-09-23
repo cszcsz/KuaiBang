@@ -34,7 +34,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/help_detail_userimg"
+            android:id="@+id/help_detail_userhead"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginLeft="24dp"
@@ -45,23 +45,23 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView3"
-            android:layout_width="58dp"
+            android:id="@+id/help_detail_user_name"
+            android:layout_width="wrap_content"
             android:layout_height="23dp"
             android:layout_marginLeft="36dp"
             android:layout_marginStart="36dp"
             android:layout_marginTop="8dp"
             android:text="小傻子"
             android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@+id/help_detail_userimg"
-            app:layout_constraintTop_toTopOf="@+id/help_detail_userimg" />
+            app:layout_constraintStart_toEndOf="@+id/help_detail_userhead"
+            app:layout_constraintTop_toTopOf="@+id/help_detail_userhead" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/help_detail_user_sexsymbol"
             android:layout_width="33dp"
             android:layout_height="25dp"
-            app:layout_constraintStart_toEndOf="@+id/textView3"
-            app:layout_constraintTop_toTopOf="@+id/textView3"
+            app:layout_constraintStart_toEndOf="@+id/help_detail_user_name"
+            app:layout_constraintTop_toTopOf="@+id/help_detail_user_name"
             app:srcCompat="@mipmap/ic_girl_symbol" />
 
         <ImageView
@@ -71,13 +71,13 @@
             android:layout_marginBottom="12dp"
             android:layout_marginTop="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView3"
-            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            app:layout_constraintStart_toStartOf="@+id/help_detail_user_name"
+            app:layout_constraintTop_toBottomOf="@+id/help_detail_user_name"
             app:layout_constraintVertical_bias="0.733"
             app:srcCompat="@mipmap/ic_credit" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/help_detail_user_credit"
             android:layout_width="27dp"
             android:layout_height="21dp"
             android:layout_marginLeft="8dp"
@@ -103,6 +103,49 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
         app:layout_constraintTop_toBottomOf="@+id/textView5">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:text="人"
+            android:textSize="13sp"
+            app:layout_constraintStart_toEndOf="@+id/help_detail_persons"
+            app:layout_constraintTop_toTopOf="@+id/imageView7" />
+
+        <ImageView
+            android:id="@+id/help_detail_img3"
+            android:layout_width="81dp"
+            android:layout_height="73dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/help_detail_img2"
+            app:layout_constraintTop_toBottomOf="@+id/help_detail_content"
+            app:layout_constraintVertical_bias="0.0"
+           />
+
+        <ImageView
+            android:id="@+id/help_detail_img2"
+            android:layout_width="81dp"
+            android:layout_height="73dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="36dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/help_detail_img1"
+            app:layout_constraintTop_toBottomOf="@+id/help_detail_content"
+            app:layout_constraintVertical_bias="0.0"
+             />
 
         <TextView
             android:id="@+id/textView6"
@@ -172,7 +215,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
-            android:text="2/3"
+            android:text="2"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/imageView7"
             app:layout_constraintTop_toTopOf="@+id/imageView7" />
@@ -194,13 +237,13 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
-            android:text="2分10秒后结束求助"
+            android:text="13:10"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/imageView9"
             app:layout_constraintTop_toTopOf="@+id/imageView9" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/help_detail_content"
             android:layout_width="332dp"
             android:layout_height="69dp"
             android:layout_marginEnd="8dp"
@@ -214,47 +257,61 @@
             app:layout_constraintTop_toBottomOf="@+id/help_detail_time" />
 
         <ImageView
-            android:id="@+id/imageView10"
-            android:layout_width="118dp"
+            android:id="@+id/help_detail_img1"
+            android:layout_width="81dp"
             android:layout_height="73dp"
             android:layout_marginBottom="4dp"
             android:layout_marginTop="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView12"
-            app:layout_constraintTop_toBottomOf="@+id/textView12"
-            app:layout_constraintVertical_bias="0.166"
-            app:srcCompat="@drawable/test_example" />
+            app:layout_constraintStart_toStartOf="@+id/help_detail_content"
+            app:layout_constraintTop_toBottomOf="@+id/help_detail_content"
+            app:layout_constraintVertical_bias="0.0"
+             />
 
         <TextView
-            android:id="@+id/textView11"
-            android:layout_width="44dp"
-            android:layout_height="6dp"
-            android:layout_marginLeft="28dp"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="4dp"
-            android:background="@color/header_bar_yellow"
-            app:layout_constraintStart_toEndOf="@+id/help_detail_persons"
-            app:layout_constraintTop_toTopOf="@+id/help_detail_persons" />
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="1dp"
+            android:text="结束"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="@+id/help_detail_time"
+            app:layout_constraintStart_toEndOf="@+id/help_detail_time"
+            app:layout_constraintTop_toTopOf="@+id/help_detail_time"
+            app:layout_constraintVertical_bias="0.0" />
 
-        <TextView
-            android:id="@+id/textView13"
-            android:layout_width="44dp"
-            android:layout_height="6dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            android:background="@color/header_bar_yellow"
-            app:layout_constraintStart_toEndOf="@+id/textView11"
-            app:layout_constraintTop_toTopOf="@+id/textView11" />
+        <!--<TextView-->
+            <!--android:id="@+id/textView11"-->
+            <!--android:layout_width="44dp"-->
+            <!--android:layout_height="6dp"-->
+            <!--android:layout_marginLeft="28dp"-->
+            <!--android:layout_marginStart="28dp"-->
+            <!--android:layout_marginTop="4dp"-->
+            <!--android:background="@color/header_bar_yellow"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/help_detail_persons"-->
+            <!--app:layout_constraintTop_toTopOf="@+id/help_detail_persons" />-->
 
-        <TextView
-            android:id="@+id/textView14"
-            android:layout_width="44dp"
-            android:layout_height="6dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            android:background="#b6afae"
-            app:layout_constraintStart_toEndOf="@+id/textView13"
-            app:layout_constraintTop_toTopOf="@+id/textView13" />
+        <!--<TextView-->
+            <!--android:id="@+id/textView13"-->
+            <!--android:layout_width="44dp"-->
+            <!--android:layout_height="6dp"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:background="@color/header_bar_yellow"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/textView11"-->
+            <!--app:layout_constraintTop_toTopOf="@+id/textView11" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/textView14"-->
+            <!--android:layout_width="44dp"-->
+            <!--android:layout_height="6dp"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:background="#b6afae"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/textView13"-->
+            <!--app:layout_constraintTop_toTopOf="@+id/textView13" />-->
 
     </android.support.constraint.ConstraintLayout>
 
