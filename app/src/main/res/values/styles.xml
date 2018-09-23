@@ -88,4 +88,10 @@
     <!--<style name="MyCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">-->
         <!--<item name="android:button">@drawable/checkbox_style</item>-->
     <!--</style>-->
+
+
+
+    <!--<style name="MyCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">-->
+        <!--<item name="android:button">@drawable/checkbox_style</item>-->
+    <!--</style>-->
 </resources>

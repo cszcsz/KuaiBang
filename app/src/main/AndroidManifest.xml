@@ -18,12 +18,17 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
+        android:name=".IMApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="Bmob_APP_KEY"
+            android:value="f5b5aa55b437ce14f1391d2f79b663c0" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.example.kuaibang.PersonalInfoActivity"
@@ -34,19 +39,17 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <meta-data
-            android:name="Bmob_APP_KEY"
-            android:value="f5b5aa55b437ce14f1391d2f79b663c0" />
-
         <activity
             android:name=".MainActivity"
             android:theme="@style/MyActivityTheme" />
         <activity
             android:name=".HelpDetailActivity"
-            android:theme="@style/MyActivityTheme" />
+            android:theme="@style/MyActivityTheme">
+        </activity>
         <activity
             android:name=".MessageActivity"
-            android:theme="@style/MyActivityTheme" />
+            android:theme="@style/MyActivityTheme">
+        </activity>
         <activity
             android:name=".HelpedSummaryActivity"
             android:theme="@style/MyActivityTheme" />
@@ -74,6 +77,12 @@
         <activity
             android:name=".SetInfoActivity"
             android:theme="@style/MyActivityTheme" />
+
+        <activity android:name=".PublishActivity" >
+        </activity>
+        <activity android:name=".PlusPictureActivity"></activity>
+
+
         <activity
             android:name=".AssistProcessActivity"
             android:theme="@style/MyActivityTheme" />
@@ -95,9 +104,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PublishActivity" >
-        </activity>
-        <activity android:name=".PlusPictureActivity"></activity>
 
 
 
@@ -113,7 +119,6 @@
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
-
         <service
             android:name="cn.bmob.newim.core.service.BmobIMService"
             android:process=":bmobcore" />

@@ -53,7 +53,7 @@ public abstract class TitleActivity extends BaseActivity{
     public void hideBackButton(){
         mBackwardbButton.setVisibility(View.INVISIBLE);}
     public void onClickBack(View view) {
-        finish();
+            finish();
     }
 }
 

@@ -29,7 +29,7 @@
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/assist_process_helping_item_content"
+            app:layout_constraintTop_toBottomOf="@+id/assist_process_helping_item_helpRemark"
             app:layout_constraintVertical_bias="0.315" />
 
         <Button
@@ -49,7 +49,7 @@
             app:layout_constraintEnd_toStartOf="@+id/assist_process_helping_item_stopBtn"
             app:layout_constraintHorizontal_bias="0.52"
             app:layout_constraintStart_toEndOf="@+id/assist_process_helping_item_chatBtn"
-            app:layout_constraintTop_toBottomOf="@+id/assist_process_helping_item_content" />
+            app:layout_constraintTop_toBottomOf="@+id/assist_process_helping_item_helpRemark" />
 
         <Button
             android:id="@+id/assist_process_helping_item_chatBtn"
@@ -64,18 +64,18 @@
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/assist_process_helping_item_content" />
+            app:layout_constraintTop_toBottomOf="@+id/assist_process_helping_item_helpRemark" />
 
-        <ImageView
-            android:id="@+id/assist_process_helping_item_userImg"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/assist_process_helping_item_userHead"
             android:layout_width="28dp"
             android:layout_height="27dp"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="16dp"
+            android:src="@mipmap/ic_userhead_girl"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/ic_userhead_girl" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/assist_process_helping_item_userName"
@@ -85,26 +85,28 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="2dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="2dp"
             android:text="小傻子"
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@+id/assist_process_helping_item_userSexImg"
-            app:layout_constraintStart_toEndOf="@+id/assist_process_helping_item_userImg"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/assist_process_helping_item_userHead"
+            app:layout_constraintTop_toTopOf="@+id/assist_process_helping_item_userHead" />
 
         <ImageView
             android:id="@+id/assist_process_helping_item_userSexImg"
             android:layout_width="24dp"
-            android:layout_height="22dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginLeft="4dp"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintBottom_toBottomOf="@+id/assist_process_helping_item_userName"
             app:layout_constraintStart_toEndOf="@+id/assist_process_helping_item_userName"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/assist_process_helping_item_userName"
             app:srcCompat="@mipmap/ic_girl_symbol" />
 
         <TextView
-            android:id="@+id/assist_process_helping_item_content"
+            android:id="@+id/assist_process_helping_item_helpRemark"
             android:layout_width="0dp"
             android:layout_height="52dp"
             android:layout_marginEnd="8dp"
@@ -117,61 +119,42 @@
             android:text="我在南教急需一个充电宝，希望有的同学能帮我下~"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView26"
-            app:layout_constraintTop_toBottomOf="@+id/textView19" />
+            app:layout_constraintTop_toBottomOf="@+id/assist_process_helping_item_userHelpNum" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-        </LinearLayout>
 
         <TextView
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
             android:text="信誉值"
             android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@+id/assist_process_helping_item_userImg"
+            app:layout_constraintStart_toEndOf="@+id/assist_process_helping_item_userHead"
             app:layout_constraintTop_toBottomOf="@+id/assist_process_helping_item_userName" />
 
         <TextView
-            android:id="@+id/assist_process_helps_item_creditValue"
+            android:id="@+id/assist_process_helping_item_creditValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="13dp"
             android:text="80"
             android:textSize="12sp"
             app:layout_constraintStart_toEndOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/assist_process_helping_item_userSexImg" />
+            app:layout_constraintTop_toTopOf="@+id/textView8" />
 
         <TextView
-            android:id="@+id/textView19"
+            android:id="@+id/assist_process_helping_item_userHelpNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="13dp"
-            android:text="帮助成功率"
+            android:layout_marginLeft="24dp"
+            android:layout_marginStart="24dp"
+            android:text="帮助过别人5次"
             android:textSize="@dimen/sp_12"
-            app:layout_constraintStart_toEndOf="@+id/assist_process_helps_item_creditValue"
-            app:layout_constraintTop_toBottomOf="@+id/assist_process_helping_item_userSexImg" />
-
-        <TextView
-            android:id="@+id/textView22"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="13dp"
-            android:text="70%"
-            android:textSize="@dimen/sp_12"
-            app:layout_constraintStart_toEndOf="@+id/textView19"
-            app:layout_constraintTop_toBottomOf="@+id/assist_process_helping_item_userSexImg" />
+            app:layout_constraintStart_toEndOf="@+id/assist_process_helping_item_creditValue"
+            app:layout_constraintTop_toTopOf="@+id/assist_process_helping_item_creditValue" />
 
         <TextView
             android:id="@+id/textView26"

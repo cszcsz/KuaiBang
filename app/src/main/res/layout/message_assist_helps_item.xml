@@ -16,19 +16,19 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/assist_helps_item_person"
+            android:id="@+id/assist_invalid_item_person"
             android:layout_width="wrap_content"
-            android:layout_height="11dp"
+            android:layout_height="12dp"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="2dp"
-            android:text="1人"
+            android:layout_marginTop="1dp"
+            android:text="1"
             android:textSize="10sp"
             app:layout_constraintStart_toEndOf="@+id/imageView13"
             app:layout_constraintTop_toTopOf="@+id/imageView13" />
 
         <TextView
-            android:id="@+id/assist_helps_item_title"
+            android:id="@+id/assist_invalid_item_title"
             android:layout_width="86dp"
             android:layout_height="18dp"
             android:layout_marginLeft="16dp"
@@ -40,7 +40,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/assist_helps_item_content"
+            android:id="@+id/assist_invalid_item_content"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -53,7 +53,7 @@
             android:text="我在图书馆三楼急需一包卫生纸，希望有的同学可以借我下……"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/assist_helps_item_title" />
+            app:layout_constraintTop_toBottomOf="@+id/assist_invalid_item_title" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -69,11 +69,24 @@
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="2dp"
-            android:text="00:05:15后结束"
+            android:text="00:05:15"
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView15"
-            app:layout_constraintTop_toTopOf="@+id/imageView15" />
+            app:layout_constraintTop_toTopOf="@+id/imageView15"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="wrap_content"
+            android:layout_height="11dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginStart="2dp"
+            android:text="结束"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/assist_helps_item_time"
+            app:layout_constraintStart_toEndOf="@+id/assist_helps_item_time"
+            app:layout_constraintTop_toTopOf="@+id/assist_helps_item_time" />
 
         <ImageView
             android:id="@+id/imageView13"
@@ -83,7 +96,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/assist_helps_item_content"
+            app:layout_constraintTop_toBottomOf="@+id/assist_invalid_item_content"
             app:srcCompat="@mipmap/ic_team" />
 
         <ImageView
@@ -100,7 +113,7 @@
             app:srcCompat="@mipmap/ic_shalou" />
 
         <TextView
-            android:id="@+id/assist_helps_item_stateText"
+            android:id="@+id/assist_invalid_item_stateText"
             android:layout_width="67dp"
             android:layout_height="15dp"
             android:layout_marginBottom="8dp"
@@ -112,7 +125,7 @@
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/assist_helps_item_stateImg"
+            app:layout_constraintTop_toTopOf="@+id/assist_invalid_item_stateImg"
             app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
@@ -127,15 +140,27 @@
             app:srcCompat="@mipmap/ic_more" />
 
         <ImageView
-            android:id="@+id/assist_helps_item_stateImg"
+            android:id="@+id/assist_invalid_item_stateImg"
             android:layout_width="22dp"
             android:layout_height="20dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/assist_helps_item_stateText"
-            app:srcCompat="@mipmap/ic_clock" />
+            app:layout_constraintEnd_toStartOf="@+id/assist_invalid_item_stateText"
+            app:srcCompat="@mipmap/ic_waiting" />
+
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="wrap_content"
+            android:layout_height="11dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginStart="2dp"
+            android:text="人"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/assist_invalid_item_person"
+            app:layout_constraintStart_toEndOf="@+id/assist_invalid_item_person"
+            app:layout_constraintTop_toTopOf="@+id/assist_invalid_item_person" />
 
     </android.support.constraint.ConstraintLayout>
 
