@@ -33,14 +33,24 @@ import com.bigkoo.pickerview.adapter.ArrayWheelAdapter;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
+import com.bumptech.glide.Glide;
 import com.contrarywind.listener.OnItemSelectedListener;
 import com.contrarywind.view.WheelView;
+import com.example.kuaibang.entity.MyUser;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.QueryListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 
 public class PersonalInfoActivity extends TitleActivity implements View.OnClickListener{
@@ -163,6 +173,8 @@ public class PersonalInfoActivity extends TitleActivity implements View.OnClickL
 
         initOptionPicker();
 
+        initPersonalInfo();
+
     }
 
     @Override
@@ -244,11 +256,17 @@ public class PersonalInfoActivity extends TitleActivity implements View.OnClickL
 
             case R.id.personal_info_usersex:{
                 userSexPicker.show();
+                MyUser myUser = new MyUser();
+                myUser.setSex(textUserSex.getText().toString().equals("男"));
+                updatePersonalInfo(myUser);
                 break;
             }
 
             case R.id.personal_info_grade:{
                 gradePicker.show();
+                MyUser myUser = new MyUser();
+                myUser.setGrade(textGrade.getText().toString());
+                updatePersonalInfo(myUser);
                 break;
             }
 
@@ -265,7 +283,12 @@ public class PersonalInfoActivity extends TitleActivity implements View.OnClickL
                     try{
                         Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
                         userHead.setImageBitmap(bitmap);
-                    }catch (FileNotFoundException e){
+
+                        MyUser myUser = new MyUser();
+                        BmobFile bmobFile = new BmobFile(new File(new URI(imageUri.toString())));
+                        myUser.setHead(bmobFile);
+                        updatePersonalInfo(myUser);
+                    }catch (Exception e){
                         e.printStackTrace();
                     }
                 }
@@ -286,6 +309,10 @@ public class PersonalInfoActivity extends TitleActivity implements View.OnClickL
                 if(resultCode == RESULT_OK){
                     CharSequence introduce = data.getCharSequenceExtra("info");
                     textIntroduce.setText(introduce);
+
+                    MyUser myUser = new MyUser();
+                    myUser.setIntroduce(introduce.toString());
+                    updatePersonalInfo(myUser);
                 }
                 break;
 
@@ -293,6 +320,9 @@ public class PersonalInfoActivity extends TitleActivity implements View.OnClickL
                 if(resultCode == RESULT_OK){
                     CharSequence username = data.getCharSequenceExtra("info");
                     textUserName.setText(username);
+
+                    MyUser myUser = new MyUser();
+                    myUser.setUserName(username.toString());
                 }
                 break;
 
@@ -300,6 +330,10 @@ public class PersonalInfoActivity extends TitleActivity implements View.OnClickL
                 if(resultCode == RESULT_OK){
                     CharSequence truename = data.getCharSequenceExtra("info");
                     textTrueName.setText(truename);
+
+                    MyUser myUser = new MyUser();
+                    myUser.setTrueName(truename.toString());
+                    updatePersonalInfo(myUser);
                 }
                 break;
 
@@ -307,6 +341,10 @@ public class PersonalInfoActivity extends TitleActivity implements View.OnClickL
                 if(resultCode == RESULT_OK){
                     CharSequence studentid = data.getCharSequenceExtra("info");
                     textStudentId.setText(studentid);
+
+                    MyUser myUser = new MyUser();
+                    myUser.setStudentId(studentid.toString());
+                    updatePersonalInfo(myUser);
                 }
                 break;
 
@@ -314,6 +352,10 @@ public class PersonalInfoActivity extends TitleActivity implements View.OnClickL
                 if(resultCode == RESULT_OK){
                     CharSequence school = data.getCharSequenceExtra("info");
                     textSchool.setText(school);
+
+                    MyUser myUser = new MyUser();
+                    myUser.setSchool(school.toString());
+                    updatePersonalInfo(myUser);
                 }
                 break;
 
@@ -321,6 +363,10 @@ public class PersonalInfoActivity extends TitleActivity implements View.OnClickL
                 if(resultCode == RESULT_OK){
                     CharSequence college = data.getCharSequenceExtra("info");
                     textCollege.setText(college);
+
+                    MyUser myUser = new MyUser();
+                    myUser.setCollege(college.toString());
+                    updatePersonalInfo(myUser);
                 }
                 break;
 
@@ -328,6 +374,10 @@ public class PersonalInfoActivity extends TitleActivity implements View.OnClickL
                 if(resultCode == RESULT_OK){
                     CharSequence major = data.getCharSequenceExtra("info");
                     textMajor.setText(major);
+
+                    MyUser myUser = new MyUser();
+                    myUser.setMajor(major.toString());
+                    updatePersonalInfo(myUser);
                 }
                 break;
 
@@ -469,6 +519,10 @@ public class PersonalInfoActivity extends TitleActivity implements View.OnClickL
         } else {
             Toast.makeText(this, "获取图像失败", Toast.LENGTH_SHORT).show();
         }
+
+        MyUser myUser = new MyUser();
+        BmobFile bmobFile = new BmobFile(new File(imagePath));
+        myUser.setHead(bmobFile);
     }
 
 
@@ -512,6 +566,43 @@ public class PersonalInfoActivity extends TitleActivity implements View.OnClickL
 
         userSexPicker.setPicker(userSexOptionsItems);
         gradePicker.setPicker(gradeOptionsItems);
+    }
+
+
+    private void initPersonalInfo(){
+
+        MyUser myUser = MyUser.getCurrentUser(MyUser.class);
+        BmobQuery<MyUser> query = new BmobQuery<MyUser>();
+        query.getObject(myUser.getObjectId(), new QueryListener<MyUser>() {
+            @Override
+            public void done(MyUser myUser, BmobException e) {
+                if(e == null){
+                    String path = myUser.getHead().getUrl();
+                    Glide.with(PersonalInfoActivity.this).load(path).into(userHead);
+                    textIntroduce.setText(myUser.getIntroduce());
+                    textUserName.setText(myUser.getIntroduce());
+                    textUserSex.setText(myUser.getSex() ? "男" : "女");
+                    textTrueName.setText(myUser.getTrueName());
+                    textSchool.setText(myUser.getSchool());
+                    textCollege.setText(myUser.getCollege());
+                    textMajor.setText(myUser.getMajor());
+                    textGrade.setText(myUser.getGrade());
+                }
+            }
+        });
+    }
+
+    private void updatePersonalInfo(MyUser myUser){
+        myUser.update(myUser.getObjectId(), new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if(e == null){
+
+                }else {
+                    ShowToast("更新失败");
+                }
+            }
+        });
     }
 
 }

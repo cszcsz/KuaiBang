@@ -5,7 +5,7 @@ import cn.bmob.v3.datatype.BmobFile;
 
 public class MyUser extends BmobUser {
 
-//    BmobUser已经包含以下字段和一些方便用户管理的方法
+//        BmobUser已经包含以下字段和一些方便用户管理的方法
 //        username: 用户的用户名（必需）
 //        password: 用户的密码（必需）
 //        email: 用户的电子邮件地址（可选）
@@ -22,6 +22,16 @@ public class MyUser extends BmobUser {
     private String trueName;
     private String studentId;
     private String school;
+
+    public String getCollege() {
+        return college;
+    }
+
+    public void setCollege(String college) {
+        this.college = college;
+    }
+
+    private String college;
     private String major;
     private String grade;
     private String score;

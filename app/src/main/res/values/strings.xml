@@ -84,5 +84,19 @@
     <string name="personal_change_head_take">拍照</string>
     <string name="personal_change_head_album">从相册选择</string>
 
+    <!--发布求助页面-->
+    <string name="publish_title">发布求助</string>
+    <string name="publish_topic">标题</string>
+    <string name="publish_content">内容</string>
+    <string name="publish_region">片区</string>
+    <string name="publish_address">详址</string>
+    <string name="publish_end_time">时效</string>
+    <string name="publish_helper_num">人数</string>
+    <string name="publish_score">积分</string>
+    <string name="publish_button">完成</string>
+
+
+
+
 
 </resources>

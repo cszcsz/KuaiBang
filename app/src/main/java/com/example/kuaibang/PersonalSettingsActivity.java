@@ -10,6 +10,8 @@ public class PersonalSettingsActivity extends TitleActivity {
         super.onCreate(savedInstanceState);
         setContentView();
         initView();
+        initListeners();
+        initData();
     }
 
     @Override

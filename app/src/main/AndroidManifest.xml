@@ -12,11 +12,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-    <!--摄像头-->
+    <!-- 摄像头 -->
     <uses-permission android:name="android.permission.CAMERA" />
-    <!--录音-->
+    <!-- 录音 -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-
 
     <application
         android:allowBackup="true"
@@ -41,7 +40,7 @@
 
         <activity
             android:name=".MainActivity"
-            android:theme="@style/MyActivityTheme"/>
+            android:theme="@style/MyActivityTheme" />
         <activity
             android:name=".HelpDetailActivity"
             android:theme="@style/MyActivityTheme" />
@@ -53,48 +52,42 @@
             android:theme="@style/MyActivityTheme" />
         <activity
             android:name=".PersonalCenterActivity"
-            android:theme="@style/MyActivityTheme">
-        </activity>
+            android:theme="@style/MyActivityTheme" />
         <activity
             android:name=".PersonalInfoActivity"
-            android:theme="@style/MyActivityTheme"/>
+            android:theme="@style/MyActivityTheme" />
         <activity
             android:name=".PersonalInfoEditActivity"
-            android:theme="@style/MyActivityTheme"/>
+            android:theme="@style/MyActivityTheme" />
         <activity
             android:name=".PersonalExperienceActivity"
-            android:theme="@style/MyActivityTheme"/>
+            android:theme="@style/MyActivityTheme" />
         <activity
             android:name=".PersonalAboutActivity"
-            android:theme="@style/MyActivityTheme"/>
+            android:theme="@style/MyActivityTheme" />
         <activity
             android:name=".PersonalSettingsActivity"
-            android:theme="@style/MyActivityTheme"/>
+            android:theme="@style/MyActivityTheme" />
         <activity
             android:name=".PersonalNotificationActivity"
-            android:theme="@style/MyActivityTheme"/>
+            android:theme="@style/MyActivityTheme" />
         <activity
-            android:name=".SetInfoActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name=".AssistProcessActivity"
-            android:theme="@style/MyActivityTheme">
-        </activity>
-        <activity android:name=".ChatActivity"
-            android:theme="@style/MyActivityTheme">
-        </activity>
-        <activity android:name=".SignUpActivity"
-            android:theme="@style/MyActivityTheme">
-        </activity>
-        <activity android:name=".FindPwdActivity"
-            android:theme="@style/MyActivityTheme">
-        </activity>
-        <activity android:name=".LoginActivity"
+            android:name=".SetInfoActivity"
+            android:theme="@style/MyActivityTheme" />
+        <activity
+            android:name=".AssistProcessActivity"
+            android:theme="@style/MyActivityTheme" />
+        <activity
+            android:name=".ChatActivity"
+            android:theme="@style/MyActivityTheme" />
+        <activity
+            android:name=".SignUpActivity"
+            android:theme="@style/MyActivityTheme" />
+        <activity
+            android:name=".FindPwdActivity"
+            android:theme="@style/MyActivityTheme" />
+        <activity
+            android:name=".LoginActivity"
             android:theme="@style/MyActivityTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -102,10 +95,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".PublishActivity" >
+        </activity>
+        <activity android:name=".PlusPictureActivity"></activity>
 
 
-        <!--以下用于Bmob即时通讯模块-->
-        <receiver android:name="cn.bmob.newim.core.ConnectChangeReceiver" >
+
+
+
+
+        <!-- 以下用于Bmob即时通讯模块 -->
+        <receiver android:name="cn.bmob.newim.core.ConnectChangeReceiver">
             <intent-filter>
                 <action android:name="cn.bmob.action.RECONNECT" />
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
@@ -113,10 +113,11 @@
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
+
         <service
             android:name="cn.bmob.newim.core.service.BmobIMService"
             android:process=":bmobcore" />
-        <!--//v2.0.4版本增加service-用于进程保活-->
+        <!-- //v2.0.4版本增加service-用于进程保活 -->
         <service
             android:name="cn.bmob.newim.core.service.NotifyService"
             android:process=":bmobcore" />

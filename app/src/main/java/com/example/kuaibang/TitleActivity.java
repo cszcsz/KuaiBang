@@ -39,6 +39,11 @@ public abstract class TitleActivity extends BaseActivity{
     }
 
 
+    public void setRightTitle(int titleId){
+        mSaveButton.setText(titleId);
+        showSaveButton();
+    }
+
     public void showSaveButton(){
         mSaveButton.setVisibility(View.VISIBLE);
     }

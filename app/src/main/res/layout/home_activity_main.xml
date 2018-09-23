@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+
     tools:context=".MainActivity">
 
     <include
@@ -12,6 +13,8 @@
         layout="@layout/home_header_bar"
         android:fitsSystemWindows="true"
         app:layout_constraintBottom_toTopOf="@+id/home_fg_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -30,9 +33,9 @@
             android:id="@+id/home_main_floatBtn"
             android:layout_width="165dp"
             android:layout_height="54dp"
-            android:layout_marginBottom="12dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
+            android:layout_marginBottom="12dp"
             android:clickable="true"
             android:scaleType="center"
             app:backgroundTint="@color/home_text_yellow"

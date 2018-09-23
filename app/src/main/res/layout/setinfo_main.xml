@@ -24,38 +24,42 @@
         android:padding="15dp"
         />
     
-    <LinearLayout
-        android:layout_width="match_parent"
+    <RadioGroup
+        android:id="@+id/sex_group"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_gravity="center"
         android:layout_marginTop="@dimen/dp_10"
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_marginRight="@dimen/dp_10">
         
-        <ImageButton
+        <RadioButton
             android:id="@+id/sex_man"
             android:layout_weight="1"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/personal_bg_white"
-            android:src="@drawable/sex_man_selector"
-            android:layout_margin="5dp"
+            android:drawableRight="@drawable/sex_man_selector"
+            android:button="@null"
+            android:padding="5dp"
+            android:layout_marginRight="30dp"
             android:layout_gravity="center"
             android:clickable="true"
             android:focusable="true"/>
 
-        <ImageButton
+        <RadioButton
             android:id="@+id/sex_woman"
             android:layout_weight="1"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/personal_bg_white"
-            android:src="@drawable/sex_woman_selector"
-            android:layout_margin="5dp"
+            android:drawableLeft="@drawable/sex_woman_selector"
+            android:button="@null"
+            android:padding="5dp"
+            android:layout_marginLeft="30dp"
             android:layout_gravity="center"
             android:clickable="true"
             android:focusable="true"/>
-    </LinearLayout>
+    </RadioGroup>
 
     <Button
         android:id="@+id/set_info_continue"
@@ -69,7 +73,9 @@
         android:text="继续"
         android:textSize="20sp"
         android:textColor="@color/home_text_white"
-        android:background="@drawable/corner_rectangle_shape"
+        android:maxLines="1"
+        android:enabled="false"
+        android:background="@drawable/continue_button_selector"
         />
 
 

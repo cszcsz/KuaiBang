@@ -15,7 +15,15 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.kuaibang.entity.MyUser;
+
 import java.io.FileNotFoundException;
+
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.QueryListener;
 
 import static cn.bmob.newim.core.BmobIMClient.getContext;
 
@@ -29,11 +37,15 @@ public class PersonalCenterActivity extends TitleActivity implements View.OnClic
 
     private TextView userName;
     private ImageView userHead;
+    private TextView userScore;
+    private TextView userCredit;
 
     private static final int EXPERIENCE = 0;
     private static final int INFO = 1;
     private static final int SETTINGS = 2;
     private static final int ABOUT = 3;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +77,8 @@ public class PersonalCenterActivity extends TitleActivity implements View.OnClic
 
         userName = findViewById(R.id.username_text);
         userHead = findViewById(R.id.userhead_image);
+        userScore = findViewById(R.id.userscore_text);
+        userCredit = findViewById(R.id.usercredit_text);
 
 
     }
@@ -81,7 +95,7 @@ public class PersonalCenterActivity extends TitleActivity implements View.OnClic
 
     @Override
     public void initData() {
-
+        initPersonalInfo();
     }
 
     @Override
@@ -160,6 +174,24 @@ public class PersonalCenterActivity extends TitleActivity implements View.OnClic
 
         logoutDialog.show();
 
+    }
+
+    private void initPersonalInfo(){
+
+        MyUser myUser = MyUser.getCurrentUser(MyUser.class);
+        BmobQuery<MyUser> query = new BmobQuery<MyUser>();
+        query.getObject(myUser.getObjectId(), new QueryListener<MyUser>() {
+            @Override
+            public void done(MyUser myUser, BmobException e) {
+                if(e == null){
+                    String path = myUser.getHead().getUrl();
+                    Glide.with(PersonalCenterActivity.this).load(path).into(userHead);
+                    userName.setText(myUser.getUserName());
+                    userCredit.setText(myUser.getCredit());
+                    userScore.setText(myUser.getScore());
+                }
+            }
+        });
     }
 
 
