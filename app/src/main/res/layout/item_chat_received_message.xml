@@ -7,7 +7,7 @@
     android:layout_height="wrap_content">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/item_chat_right_userAvatar"
+        android:id="@+id/item_chat_left_userAvatar"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_marginBottom="2dp"

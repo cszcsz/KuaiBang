@@ -184,7 +184,7 @@
         app:layout_constraintTop_toTopOf="@+id/login_findPwd_textView" />
 
     <TextView
-        android:id="@+id/helped_summary_state_persons"
+        android:id="@+id/helped_summary_state_person"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="36dp"
@@ -195,15 +195,15 @@
         app:layout_constraintTop_toBottomOf="@+id/login_findPwd_textView" />
 
     <TextView
-        android:id="@+id/textView30"
+        android:id="@+id/helped_summary_state_persons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="28dp"
         android:layout_marginStart="28dp"
         android:text="2人"
         android:textColor="@color/home_bg_black"
-        app:layout_constraintStart_toEndOf="@+id/helped_summary_state_persons"
-        app:layout_constraintTop_toTopOf="@+id/helped_summary_state_persons" />
+        app:layout_constraintStart_toEndOf="@+id/helped_summary_state_person"
+        app:layout_constraintTop_toTopOf="@+id/helped_summary_state_person" />
 
     <TextView
         android:id="@+id/textView24"
@@ -218,7 +218,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView30" />
+        app:layout_constraintTop_toBottomOf="@+id/helped_summary_state_persons" />
 
     <TextView
         android:id="@+id/textView31"

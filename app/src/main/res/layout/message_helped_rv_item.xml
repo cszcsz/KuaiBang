@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/message_helped_rv_item_userImg"
             android:layout_width="28dp"
             android:layout_height="27dp"
@@ -24,7 +24,7 @@
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/ic_userhead_girl" />
+            android:src="@mipmap/ic_userhead_girl" />
 
         <TextView
             android:id="@+id/message_helped_rv_item_userName"
@@ -51,7 +51,7 @@
 
         <TextView
             android:id="@+id/message_helped_rv_item_title"
-            android:layout_width="86dp"
+            android:layout_width="wrap_content"
             android:layout_height="18dp"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
@@ -98,7 +98,7 @@
 
         <TextView
             android:id="@+id/message_helped_rv_item_location"
-            android:layout_width="24dp"
+            android:layout_width="wrap_content"
             android:layout_height="15dp"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="4dp"
@@ -124,7 +124,7 @@
 
         <TextView
             android:id="@+id/message_helped_rv_item_score"
-            android:layout_width="19dp"
+            android:layout_width="wrap_content"
             android:layout_height="15dp"
             android:layout_marginLeft="4dp"
             android:layout_marginStart="4dp"

@@ -21,22 +21,18 @@ import android.widget.Toast;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.kuaibang.adapter.AssistProcessRvItemAdapter;
 import com.example.kuaibang.entity.Helper;
-import com.example.kuaibang.entity.MyUser;
 import com.example.kuaibang.entity.Post;
-import com.example.kuaibang.entity.Test;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.BmobUser;
-import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 public class AssistProcessActivity extends TitleActivity {
 
@@ -51,7 +47,6 @@ public class AssistProcessActivity extends TitleActivity {
     private Button concelBtn;
     private EditText editText;
 
-    private List<Helper> datas;
     private List<Helper> allDatas;
 
     private int rvCounter = 0;
@@ -68,8 +63,6 @@ public class AssistProcessActivity extends TitleActivity {
         Log.i(TAG, "帖子id为:"+currentPostId);
         setContentView();
         initView();
-        initializeData();
-
         initData();
         setTitle(R.string.assist_process_title);
     }
@@ -86,10 +79,12 @@ public class AssistProcessActivity extends TitleActivity {
         refreshLayout = findViewById(R.id.assist_process_refresh_layout);
     }
 
-    private void initializeData(){
-
-        datas = new ArrayList<>();
-        allDatas = new ArrayList<>();
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (allDatas ==null){
+            allDatas = new ArrayList<>();
+        }
         BmobQuery<Helper> query = new BmobQuery<>();
         query.addWhereEqualTo("post", currentPostId);
         query.include("user,post,postUser");
@@ -101,35 +96,58 @@ public class AssistProcessActivity extends TitleActivity {
                     if (list.size()==0){
                         Log.i(TAG, "没查到对象");
                         Toast.makeText(AssistProcessActivity.this,"该条求助还没有人选择帮助，请耐心等待哦~",Toast.LENGTH_LONG).show();
-                    }else if(list.size()<5){
-                        for (rvCounter=0;rvCounter<list.size();rvCounter++){
-                            datas.add(list.get(rvCounter));
-                        }
-                    }else if(list.size()>=5){
-                        for (rvCounter=0;rvCounter<5;rvCounter++){
-                            datas.add(list.get(rvCounter));
-                        }
                     }
                     for (int i=0;i<list.size();i++){
                         allDatas.add(list.get(i));
                     }
                     Log.i(TAG, "查询初始helper数据成功!");
                 }else{
-                   ShowToast("初始化数据失败");
+                    ShowToast("初始化数据失败");
                     e.printStackTrace();
                 }
-                initAdapter();
+                if (adapter==null){
+                    initAdapter();
+                }
             }
         });
 
     }
+
+//    private void initializeData(){
+//
+//        allDatas = new ArrayList<>();
+//        BmobQuery<Helper> query = new BmobQuery<>();
+//        query.addWhereEqualTo("post", currentPostId);
+//        query.include("user,post,postUser");
+//        query.order("-helpState,endTime");
+//        query.findObjects(new FindListener<Helper>() {
+//            @Override
+//            public void done(List<Helper> list, BmobException e) {
+//                if (e==null){
+//                    if (list.size()==0){
+//                        Log.i(TAG, "没查到对象");
+//                        Toast.makeText(AssistProcessActivity.this,"该条求助还没有人选择帮助，请耐心等待哦~",Toast.LENGTH_LONG).show();
+//                    }
+//                    for (int i=0;i<list.size();i++){
+//                        allDatas.add(list.get(i));
+//                    }
+//                    Log.i(TAG, "查询初始helper数据成功!");
+//                }else{
+//                   ShowToast("初始化数据失败");
+//                    e.printStackTrace();
+//                }
+//                initAdapter();
+//            }
+//        });
+//
+//    }
 
     private void initAdapter(){
         layoutManager = new LinearLayoutManager(AssistProcessActivity.this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new AssistProcessRvItemAdapter(datas);
+        adapter = new AssistProcessRvItemAdapter(allDatas);
         adapter.openLoadAnimation();
         recyclerView.setAdapter(adapter);
         initListeners();
@@ -147,19 +165,97 @@ public class AssistProcessActivity extends TitleActivity {
         // 为rv中每个item条目下面的子控件设置点击事件
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+            public void onItemChildClick(final BaseQuickAdapter adapter, View view, final int position) {
                 switch (view.getId()){
                     case R.id.assist_process_helping_item_chatBtn:
                         ShowToast("进入 找他详聊 界面");
                         break;
                     case R.id.assist_process_helping_item_finishBtn:
-                       ShowToast("完成该帮助");
+                        Helper helper = new Helper();
+                        helper.setHelpState(0);
+                        helper.update(allDatas.get(position).getObjectId(), new UpdateListener() {
+                            @Override
+                            public void done(BmobException e) {
+                                if (e==null){
+                                    allDatas.get(position).setHelpState(0);
+                                    adapter.remove(position);
+                                    ShowToast("已完成该帮助成功");
+                                }else {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        Post changePost = new Post();
+                        changePost.setState(0);
+                        changePost.update(allDatas.get(position).getPost().getObjectId(), new UpdateListener() {
+                            @Override
+                            public void done(BmobException e) {
+                                if (e==null){
+                                    Log.i(TAG, "帖子状态改变成功");
+                                }else{
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                       ShowToast("已完成该帮助");
                         break;
                     case R.id.assist_process_helping_item_stopBtn:
-                        showDialog();
+                        Helper helper2 = new Helper();
+                        helper2.setHelpState(-1);
+                        helper2.update(allDatas.get(position).getObjectId(), new UpdateListener() {
+                            @Override
+                            public void done(BmobException e) {
+                                if (e==null){
+                                    allDatas.get(position).setHelpState(-1);
+                                    adapter.remove(position);
+                                    ShowToast("终止该帮助成功");
+                                }else {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                            Post changePost3 = new Post();
+                            changePost3.setState(1);
+                            changePost3.update(allDatas.get(position).getPost().getObjectId(), new UpdateListener() {
+                                @Override
+                                public void done(BmobException e) {
+                                    if (e==null){
+                                        Log.i(TAG, "帖子状态改变成功");
+                                    }else{
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+
+//                        showDialog(position);
                         break;
                     case R.id.assist_process_helps_item_acceptBtn:
-                        ShowToast("接受帮助，该帖子状态改变");
+                        Helper helper3 = new Helper();
+                        helper3.setHelpState(2);
+                        helper3.update(allDatas.get(position).getObjectId(), new UpdateListener() {
+                            @Override
+                            public void done(BmobException e) {
+                                if (e==null){
+                                    allDatas.get(position).setHelpState(2);
+                                    adapter.notifyDataSetChanged();
+                                    ShowToast("接受该帮助成功，进入正在帮助状态");
+                                }else {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        Post changePost2 = new Post();
+                        changePost2.setState(2);
+                        changePost2.update(allDatas.get(position).getPost().getObjectId(), new UpdateListener() {
+                            @Override
+                            public void done(BmobException e) {
+                                if (e==null){
+                                    Log.i(TAG, "帖子状态改变成功");
+                                }else{
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
                         break;
                     case R.id.assist_process_helping_item_userHead:
                         ShowToast("进入用户详情页面");
@@ -177,20 +273,20 @@ public class AssistProcessActivity extends TitleActivity {
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                Date currentDate = new Date(System.currentTimeMillis());
+
                 BmobQuery<Helper> query = new BmobQuery<>();
-                query.setLimit(5);
                 query.addWhereEqualTo("post",currentPostId);
-                query.addWhereGreaterThanOrEqualTo("createdAt",new BmobDate(currentDate));
+                query.include("user,post,postUser");
+                query.order("-helpState,endTime");
                 query.findObjects(new FindListener<Helper>() {
                     @Override
                     public void done(List<Helper> list, BmobException e) {
                         if(e==null){
-                            if(list.size()==0){
+                            if(list.size()==adapter.getItemCount()){
                                 ShowToast("暂无更新的求助信息");
+                            }else {
+                                adapter.setNewData(list);
                             }
-                            adapter.getData().addAll(list);
-                            adapter.notifyDataSetChanged();
                         }else {
                             e.printStackTrace();
 
@@ -204,18 +300,7 @@ public class AssistProcessActivity extends TitleActivity {
         refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                try{
-                    List<Helper> moreData = new ArrayList<>();
-                    for (int i=0;i<3&&rvCounter<allDatas.size();i++){
-                        moreData.add(allDatas.get(rvCounter));
-                        rvCounter++;
-                    }
-                    adapter.getData().addAll(moreData);
-                    adapter.notifyDataSetChanged();
-                    refreshLayout.finishLoadMore(1000);
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
+                refreshLayout.finishLoadMore(1000);
             }
         });
     }
@@ -271,4 +356,8 @@ public class AssistProcessActivity extends TitleActivity {
         });
     }
 
+    @Override
+    public void onClickBack(View view) {
+        super.onClickBack(view);
+    }
 }

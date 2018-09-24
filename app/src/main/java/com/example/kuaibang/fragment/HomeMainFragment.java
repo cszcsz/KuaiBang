@@ -1,16 +1,11 @@
 package com.example.kuaibang.fragment;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -21,27 +16,19 @@ import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.kuaibang.HelpDetailActivity;
-import com.example.kuaibang.MainActivity;
 import com.example.kuaibang.R;
 import com.example.kuaibang.adapter.HomeRvItemAdapter;
-import com.example.kuaibang.entity.Helper;
-import com.example.kuaibang.entity.HomeRvItem;
 import com.example.kuaibang.entity.MyUser;
-import com.example.kuaibang.entity.Picture;
 import com.example.kuaibang.entity.Post;
-import com.example.kuaibang.entity.Test;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.sql.Date;
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.bmob.newim.bean.BmobIMMessage;
-import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobDate;
@@ -49,23 +36,24 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 public class HomeMainFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private RefreshLayout refreshLayout;
     private HomeRvItemAdapter adapter;
-    private List<Post> datas;
     private List<Post> allDatas;
 
     private int rvCounter = 0;
-
+    MyUser currentUser;
 
     private static final String TAG = "HomeMainFragment";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        currentUser = BmobUser.getCurrentUser(MyUser.class);
     }
 
     @Nullable
@@ -76,45 +64,58 @@ public class HomeMainFragment extends Fragment {
         recyclerView = view.findViewById(R.id.home_recycle_view);
         refreshLayout = view.findViewById(R.id.home_refresh_layout);
 
-        datas = new ArrayList<>();
         allDatas = new ArrayList<>();
         BmobQuery<Post> query = new BmobQuery<>();
+        query.addWhereEqualTo("state",1);
         query.include("user");
-        query.setLimit(40);
         query.order("endTime");
         query.findObjects(new FindListener<Post>() {
             @Override
             public void done(List<Post> list, BmobException e) {
                 if (e==null){
+                    Log.i(TAG, String.valueOf(list.size()));
                     if (list.size()==0){
                         Log.i(TAG, "没查到对象");
-                    }else if(list.size()<5){
-                        for (rvCounter=0;rvCounter<list.size();rvCounter++){
-                            datas.add(list.get(rvCounter));
-                        }
-                    }else if(list.size()>=5){
-                        for (rvCounter=0;rvCounter<5;rvCounter++){
-                            datas.add(list.get(rvCounter));
-                        }
                     }
+
+                    Date currentDate = new Date(System.currentTimeMillis());
                     for (int i=0;i<list.size();i++){
-                        allDatas.add(list.get(i));
+                        java.util.Date postDate = new java.util.Date(BmobDate.getTimeStamp(list.get(i).getEndTime().getDate()));
+                        if (postDate.before(currentDate)){
+                            Post newPost = new Post();
+                            newPost.setState(-1);
+                            newPost.update(list.get(i).getObjectId(),new UpdateListener() {
+                                @Override
+                                public void done(BmobException e) {
+                                    if (e==null){
+                                        Log.i(TAG, "更新数据成功");
+                                    }else {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+                            list.remove(i);
+                        }
                     }
+
+                    initializeAdapter(list);
+                    Log.i(TAG, "done: "+String.valueOf(allDatas.size()));
                     Log.i(TAG, "查询初始帖子数据成功!");
+
                 }else{
                     Toast.makeText(getContext(),"初始化数据失败",Toast.LENGTH_SHORT).show();
                     Log.i(TAG, e.getMessage());
                 }
-                initializeAdapter();
+
             }
         });
 
         return view;
     }
 
-    private void initializeAdapter(){
+    private void initializeAdapter(final List<Post> dataList){
 
-        adapter = new HomeRvItemAdapter(R.layout.home_rv_item,datas);
+        adapter = new HomeRvItemAdapter(R.layout.home_rv_item,dataList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
@@ -129,7 +130,7 @@ public class HomeMainFragment extends Fragment {
             public void onItemClick(BaseQuickAdapter adapter, View view, final int position) {
                 BmobQuery<Post> query = new BmobQuery<>();
                 query.include("user");
-                query.getObject(datas.get(position).getObjectId(), new QueryListener<Post>() {
+                query.getObject(dataList.get(position).getObjectId(), new QueryListener<Post>() {
                             @Override
                             public void done(Post post, BmobException e) {
                                 if (e==null){
@@ -142,13 +143,17 @@ public class HomeMainFragment extends Fragment {
                                     bundle.putString("postScore",post.getScore().toString());
                                     bundle.putString("postHelperNum",post.getHelperNum().toString());
                                     bundle.putString("postAddress",post.getAddress());
-                                    SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+                                    SimpleDateFormat format = new SimpleDateFormat("MM月dd日 HH:mm");
                                     java.util.Date date = new java.util.Date(BmobDate.getTimeStamp(post.getEndTime().getDate()));
                                     String dateTime = format.format(date);
                                     bundle.putString("postEndTime",dateTime);
                                     bundle.putString("postContent",post.getContent());
-                                    bundle.putBoolean("isShowBtn",true);
-                                    bundle.putString("postId",datas.get(position).getObjectId());
+                                    if (post.getUser().getObjectId().equals(currentUser.getObjectId())){
+                                        bundle.putBoolean("isShowBtn",false);
+                                    }else {
+                                        bundle.putBoolean("isShowBtn",true);
+                                    }
+                                    bundle.putString("postId",dataList.get(position).getObjectId());
                                     intent.putExtra("data",bundle);
                                     startActivity(intent);
                                 }else {
@@ -175,22 +180,44 @@ public class HomeMainFragment extends Fragment {
             @Override
             public void onRefresh(@NonNull final RefreshLayout refreshLayout) {
 
-                Date currentDate = new Date(System.currentTimeMillis());
                 BmobQuery<Post> query = new BmobQuery<>();
-                query.setLimit(5);
-                query.addWhereGreaterThanOrEqualTo("createdAt",new BmobDate(currentDate));
+                query.addWhereEqualTo("state",1);
+                query.include("user");
+                query.order("endTime");
                 query.findObjects(new FindListener<Post>() {
                     @Override
                     public void done(List<Post> list, BmobException e) {
-                        if(e==null){
-                            if(list.size()==0){
+                        if (e==null){
+                            Log.i(TAG, "onRefresh:查询数据成功");
+                            if (list.size()<=adapter.getItemCount()){
                                 Toast.makeText(getContext(),"暂无更新的求助信息",Toast.LENGTH_SHORT).show();
+                            }else {
+                                Date currentDate = new Date(System.currentTimeMillis());
+                                for (int i=0;i<list.size();i++){
+                                    java.util.Date postDate = new java.util.Date(BmobDate.getTimeStamp(list.get(i).getEndTime().getDate()));
+                                    if (postDate.before(currentDate)){
+                                        Post newPost = new Post();
+                                        newPost.setState(-1);
+                                        newPost.update(list.get(i).getObjectId(),new UpdateListener() {
+                                            @Override
+                                            public void done(BmobException e) {
+                                                if (e==null){
+                                                    Log.i(TAG, "更新数据成功");
+                                                }else {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        });
+                                        list.remove(i);
+                                    }
+                                }
+                                if (list.size()<=adapter.getItemCount()){
+                                    Toast.makeText(getContext(),"暂无更新的求助信息",Toast.LENGTH_SHORT).show();
+                                }
+                                adapter.setNewData(list);
                             }
-                            adapter.getData().addAll(list);
-                            adapter.notifyDataSetChanged();
-                        }else {
+                        }else{
                             e.printStackTrace();
-
                         }
                     }
                 });
@@ -201,13 +228,13 @@ public class HomeMainFragment extends Fragment {
         refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                List<Post> moreData = new ArrayList<>();
-                for (int i=0;i<3&&rvCounter<allDatas.size();i++){
-                    moreData.add(allDatas.get(rvCounter));
-                    rvCounter++;
-                }
-                adapter.getData().addAll(moreData);
-                adapter.notifyDataSetChanged();
+//                List<Post> moreData = new ArrayList<>();
+//                for (int i=0;i<3&&rvCounter<allDatas.size();i++){
+//                    moreData.add(allDatas.get(rvCounter));
+//                    rvCounter++;
+//                }
+//                adapter.getData().addAll(moreData);
+//                adapter.notifyDataSetChanged();
                 refreshLayout.finishLoadMore(1000);
             }
         });
@@ -222,8 +249,6 @@ public class HomeMainFragment extends Fragment {
             e.printStackTrace();
         }
     }
-
-
 
 
 
@@ -268,5 +293,34 @@ public class HomeMainFragment extends Fragment {
     }
 
 
+
+    // 复合查询：
+    //                Date currentDate = new Date(System.currentTimeMillis());
+//                List<BmobQuery<Post>> andQuerys = new ArrayList<BmobQuery<Post>>();
+//                BmobQuery<Post> query1 = new BmobQuery<>();
+//                query1.addWhereEqualTo("state",1);
+//                BmobQuery<Post> query2 = new BmobQuery<>();
+//                query2.addWhereGreaterThanOrEqualTo("createdAt",new BmobDate(currentDate));
+//                andQuerys.add(query1);
+//                andQuerys.add(query2);
+//                BmobQuery<Post> query = new BmobQuery<>();
+//                query.and(andQuerys);
+//                query.setLimit(5);
+//                query.findObjects(new FindListener<Post>() {
+//                    @Override
+//                    public void done(List<Post> list, BmobException e) {
+//                        if(e==null){
+//                            if(list.size()==0){
+//                                Toast.makeText(getContext(),"暂无更新的求助信息",Toast.LENGTH_SHORT).show();
+//                            }
+//                            Log.i(TAG, "Update:"+String.valueOf(list.size()));
+//                            adapter.getData().addAll(list);
+//                            adapter.notifyDataSetChanged();
+//                        }else {
+//                            e.printStackTrace();
+//
+//                        }
+//                    }
+//                });
 
 }

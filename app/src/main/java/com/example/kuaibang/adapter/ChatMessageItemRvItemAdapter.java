@@ -7,7 +7,6 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.util.MultiTypeDelegate;
 import com.example.kuaibang.R;
 import com.example.kuaibang.entity.Message;
-import com.example.kuaibang.entity.Test;
 
 import java.util.List;
 

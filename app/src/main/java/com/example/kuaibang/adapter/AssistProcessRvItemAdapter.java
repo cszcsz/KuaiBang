@@ -10,7 +10,7 @@ import com.chad.library.adapter.base.util.MultiTypeDelegate;
 import com.example.kuaibang.IMApplication;
 import com.example.kuaibang.R;
 import com.example.kuaibang.entity.Helper;
-import com.example.kuaibang.entity.Test;
+import com.example.kuaibang.entity.ChatListItem;
 
 import java.util.List;
 
@@ -28,15 +28,17 @@ public class AssistProcessRvItemAdapter extends BaseQuickAdapter<Helper,BaseView
         });
 
         getMultiTypeDelegate()
-                .registerItemType(Test.HELPS_STATE, R.layout.assist_process_helps_item)
-                .registerItemType(Test.HELPING_STATE,R.layout.assist_process_helping_item);
+                .registerItemType(Helper.HELPS_STATE, R.layout.assist_process_helps_item)
+                .registerItemType(Helper.HELPING_STATE,R.layout.assist_process_helping_item)
+                .registerItemType(Helper.HELPED_STATE,R.layout.null_layout)
+                .registerItemType(Helper.INVALID_STATE,R.layout.null_layout);
     }
 
     @Override
     protected void convert(BaseViewHolder helper, Helper item) {
         try{
             switch (helper.getItemViewType()){
-                case Test.HELPS_STATE:
+                case Helper.HELPS_STATE:
                     if (item.getUser().getHead().getFileUrl()!=""){
                         Glide.with(IMApplication.getContext()).load(item.getUser().getHead().getFileUrl()).into((CircleImageView)helper.getView(R.id.assist_process_helps_item_userHead));
                     }else {
@@ -59,7 +61,7 @@ public class AssistProcessRvItemAdapter extends BaseQuickAdapter<Helper,BaseView
                             .setText(R.id.assist_process_helping_item_userHelpNum,"帮助过别人"+item.getUser().getHelpNum().toString()+"次");
 
                     break;
-                case Test.HELPING_STATE:
+                case Helper.HELPING_STATE:
                     if (item.getUser().getHead().getFileUrl()!=""){
                         Glide.with(IMApplication.getContext()).load(item.getUser().getHead().getFileUrl()).into((CircleImageView)helper.getView(R.id.assist_process_helping_item_userHead));
                     }else {

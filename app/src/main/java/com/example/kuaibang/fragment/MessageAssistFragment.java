@@ -4,11 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,15 +17,12 @@ import com.example.kuaibang.AssistProcessActivity;
 import com.example.kuaibang.HelpDetailActivity;
 import com.example.kuaibang.R;
 import com.example.kuaibang.adapter.AssistMainRvItemAdapter;
-import com.example.kuaibang.adapter.HomeRvItemAdapter;
 import com.example.kuaibang.entity.MyUser;
 import com.example.kuaibang.entity.Post;
-import com.example.kuaibang.entity.Test;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +41,6 @@ public class MessageAssistFragment extends Fragment {
 
     private AssistMainRvItemAdapter adapter;
 
-    private List<Post> datas;
     private List<Post> allDatas;
 
     private int rvCounter = 0;
@@ -66,38 +60,30 @@ public class MessageAssistFragment extends Fragment {
         recyclerView = view.findViewById(R.id.assist_main_recycle_view);
         refreshLayout = view.findViewById(R.id.assist_main_refresh_layout);
 
-        datas = new ArrayList<>();
-        allDatas = new ArrayList<>();
-        BmobQuery<Post> query = new BmobQuery<>();
-        query.addWhereEqualTo("user", BmobUser.getCurrentUser(MyUser.class));
-        query.include("user");
-        query.order("-state,endTime");
-        query.findObjects(new FindListener<Post>() {
-            @Override
-            public void done(List<Post> list, BmobException e) {
-                if (e==null){
-                    if (list.size()==0){
-                        Log.i(TAG, "没查到对象");
-                    }else if(list.size()<5){
-                        for (rvCounter=0;rvCounter<list.size();rvCounter++){
-                            datas.add(list.get(rvCounter));
-                        }
-                    }else if(list.size()>=5){
-                        for (rvCounter=0;rvCounter<5;rvCounter++){
-                            datas.add(list.get(rvCounter));
-                        }
-                    }
-                    for (int i=0;i<list.size();i++){
-                        allDatas.add(list.get(i));
-                    }
-                    Log.i(TAG, "查询初始帖子数据成功!");
-                }else{
-                    Toast.makeText(getContext(),"初始化数据失败",Toast.LENGTH_SHORT).show();
-                    e.printStackTrace();
-                }
-                initializeAdapter();
-            }
-        });
+
+//        allDatas = new ArrayList<>();
+//        BmobQuery<Post> query = new BmobQuery<>();
+//        query.addWhereEqualTo("user", BmobUser.getCurrentUser(MyUser.class));
+//        query.include("user");
+//        query.order("-state,endTime");
+//        query.findObjects(new FindListener<Post>() {
+//            @Override
+//            public void done(List<Post> list, BmobException e) {
+//                if (e==null){
+//                    if (list.size()==0){
+//                        Log.i(TAG, "没查到对象");
+//                    }
+//                    for (int i=0;i<list.size();i++){
+//                        allDatas.add(list.get(i));
+//                    }
+//                    Log.i(TAG, "查询初始帖子数据成功!");
+//                }else{
+//                    Toast.makeText(getContext(),"初始化数据失败",Toast.LENGTH_SHORT).show();
+//                    e.printStackTrace();
+//                }
+//                initializeAdapter();
+//            }
+//        });
 
 
         return view;
@@ -106,7 +92,7 @@ public class MessageAssistFragment extends Fragment {
 
     private void initializeAdapter(){
 
-        adapter = new AssistMainRvItemAdapter(datas);
+        adapter = new AssistMainRvItemAdapter(allDatas);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
@@ -119,7 +105,9 @@ public class MessageAssistFragment extends Fragment {
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                AssistProcessActivity.startMyActivity(getContext(),datas.get(position).getObjectId(),"data2");
+                if (allDatas.get(position).getState()==1||allDatas.get(position).getState()==2){
+                    AssistProcessActivity.startMyActivity(getContext(),allDatas.get(position).getObjectId(),"data2");
+                }
             }
         });
         // 为rv中每个item条目下面的子控件设置点击事件
@@ -128,7 +116,7 @@ public class MessageAssistFragment extends Fragment {
             public void onItemChildClick(BaseQuickAdapter adapter, View view,final int position) {
                 BmobQuery<Post> query = new BmobQuery<>();
                 query.include("user");
-                query.getObject(datas.get(position).getObjectId(), new QueryListener<Post>() {
+                query.getObject(allDatas.get(position).getObjectId(), new QueryListener<Post>() {
                     @Override
                     public void done(Post post, BmobException e) {
                         if (e==null){
@@ -147,9 +135,9 @@ public class MessageAssistFragment extends Fragment {
                             bundle.putString("postEndTime",dateTime);
                             bundle.putString("postContent",post.getContent());
                             bundle.putBoolean("isShowBtn",false);
-                            bundle.putString("postId",datas.get(position).getObjectId());
+                            bundle.putString("postId",allDatas.get(position).getObjectId());
                             intent.putExtra("data",bundle);
-                            startActivity(intent);
+                            startActivityForResult(intent,1);
                         }else {
                             e.printStackTrace();
                             Toast.makeText(getContext(),"查询帖子详细信息出错",Toast.LENGTH_SHORT).show();
@@ -166,20 +154,19 @@ public class MessageAssistFragment extends Fragment {
             @Override
             public void onRefresh(@NonNull final RefreshLayout refreshLayout) {
 
-                Date currentDate = new Date(System.currentTimeMillis());
                 BmobQuery<Post> query = new BmobQuery<>();
-                query.setLimit(5);
-                query.addWhereEqualTo("username",BmobUser.getCurrentUser(MyUser.class));
-                query.addWhereGreaterThanOrEqualTo("createdAt",new BmobDate(currentDate));
+                query.addWhereEqualTo("user", BmobUser.getCurrentUser(MyUser.class));
+                query.include("user");
+                query.order("-state,endTime");
                 query.findObjects(new FindListener<Post>() {
                     @Override
                     public void done(List<Post> list, BmobException e) {
                         if(e==null){
-                            if(list.size()==0){
+                            if(list.size()==adapter.getItemCount()){
                                 Toast.makeText(getContext(),"暂无更新的求助信息",Toast.LENGTH_SHORT).show();
                             }
-                            adapter.getData().addAll(list);
-                            adapter.notifyDataSetChanged();
+                            allDatas = list;
+                            adapter.setNewData(list);
                         }else {
                             e.printStackTrace();
 
@@ -193,16 +180,51 @@ public class MessageAssistFragment extends Fragment {
         refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                List<Post> moreData = new ArrayList<>();
-                for (int i=0;i<3&&rvCounter<allDatas.size();i++){
-                    moreData.add(allDatas.get(rvCounter));
-                    rvCounter++;
-                }
-                adapter.getData().addAll(moreData);
-                adapter.notifyDataSetChanged();
+
                 refreshLayout.finishLoadMore(1000);
             }
         });
 
     }
-}
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (allDatas==null){
+            allDatas = new ArrayList<>();
+        }
+        BmobQuery<Post> query = new BmobQuery<>();
+        query.addWhereEqualTo("user", BmobUser.getCurrentUser(MyUser.class));
+        query.include("user");
+        query.order("-state,endTime");
+        query.findObjects(new FindListener<Post>() {
+            @Override
+            public void done(List<Post> list, BmobException e) {
+                if(e==null){
+                    allDatas = list;
+                    if (adapter==null){
+                        initializeAdapter();
+                    }
+                    adapter.setNewData(list);
+                }else {
+                    e.printStackTrace();
+
+                }
+
+            }
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {// 通过requestCode来辨别数据来自哪个activity返回的
+            case 1:// 取
+
+                break;
+                }
+
+        }
+
+    }

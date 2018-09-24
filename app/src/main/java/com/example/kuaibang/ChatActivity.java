@@ -16,7 +16,9 @@ import android.widget.EditText;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.kuaibang.adapter.ChatMessageItemRvItemAdapter;
+import com.example.kuaibang.entity.ChatListItem;
 import com.example.kuaibang.entity.Message;
+import com.example.kuaibang.entity.MyUser;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -36,9 +38,16 @@ import cn.bmob.newim.listener.ConversationListener;
 import cn.bmob.newim.listener.MessageListHandler;
 import cn.bmob.newim.listener.MessageSendListener;
 import cn.bmob.newim.listener.MessagesQueryListener;
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 
 public class ChatActivity extends TitleActivity implements View.OnClickListener,MessageListHandler {
+
+    public static String userName;
+    public static String userHead;
+    public static String chatContent;
+
+    public static List<ChatListItem> chatList;
 
     private static final String TAG = "ChatActivity";
     
@@ -54,13 +63,15 @@ public class ChatActivity extends TitleActivity implements View.OnClickListener,
     boolean isConnect = false;
     boolean isOpenConversation = false;
 
-    String userID = "40d45074ee";
+    String userID;
 
     BmobIMConversation mBmobIMConversation;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        userID = BmobUser.getCurrentUser(MyUser.class).getObjectId();
         setContentView();
         initView();
         // 获取从chatList碎片传过来的会话
@@ -69,6 +80,7 @@ public class ChatActivity extends TitleActivity implements View.OnClickListener,
         initListeners();
         initData();
         setTitle(mBmobIMConversation.getConversationTitle());
+        chatList = new ArrayList<>();
 
     }
 
@@ -126,6 +138,11 @@ public class ChatActivity extends TitleActivity implements View.OnClickListener,
                             Log.i(TAG, list.get(i).getBmobIMUserInfo().getUserId());
                             Log.i(TAG,mBmobIMConversation.getConversationId());
                         }
+                        ChatListItem item = new ChatListItem();
+                        item.setImgUrl(list.get(0).getBmobIMUserInfo().getAvatar());
+                        item.setContent(list.get(0).getContent());
+                        item.setTitle(list.get(0).getBmobIMUserInfo().getName());
+                        chatList.add(item);
 
                     }
                 }else {
@@ -217,7 +234,7 @@ public class ChatActivity extends TitleActivity implements View.OnClickListener,
     @Override
     public void onClickBack(View view) {
 //        BmobIM.getInstance().deleteConversation(mBmobIMConversation);
-        finish();
+          finish();
     }
 
     @Override

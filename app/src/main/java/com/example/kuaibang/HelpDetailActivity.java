@@ -15,14 +15,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.kuaibang.entity.Helper;
+import com.example.kuaibang.entity.MyUser;
 import com.example.kuaibang.entity.Picture;
+import com.example.kuaibang.entity.Post;
 
 import java.util.List;
 
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.QueryListener;
+import cn.bmob.v3.listener.SaveListener;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
@@ -50,6 +56,8 @@ public class HelpDetailActivity extends TitleActivity implements View.OnClickLis
     private ImageView postImg3;
 
     private String postId;
+
+    MyUser currentUser;
     
     boolean helpBtnIsShow = true;
     private static final String TAG = "HelpDetailActivity";
@@ -57,6 +65,7 @@ public class HelpDetailActivity extends TitleActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        currentUser = BmobUser.getCurrentUser(MyUser.class);
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("data");
         helpBtnIsShow = bundle.getBoolean("isShowBtn");
@@ -121,6 +130,23 @@ public class HelpDetailActivity extends TitleActivity implements View.OnClickLis
         }
     }
 
+    private void checkSelfUserHelp(){
+        BmobQuery<Post> query = new BmobQuery<>();
+        query.include("user");
+        query.getObject(postId, new QueryListener<Post>() {
+            @Override
+            public void done(Post post, BmobException e) {
+                if (e==null){
+                    if(post.getUser().getObjectId().equals(currentUser.getObjectId())){
+                        helpBtn.setVisibility(View.GONE);
+                    }
+                }else {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
     private void getIntentData(){
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("data");
@@ -172,6 +198,37 @@ public class HelpDetailActivity extends TitleActivity implements View.OnClickLis
         });
     }
 
+    private void craetHelper(){
+        BmobQuery<Post> query = new BmobQuery<>();
+        query.include("user");
+        query.getObject(postId, new QueryListener<Post>() {
+            @Override
+            public void done(Post post, BmobException e) {
+                if (e==null){
+                    Helper newHelper = new Helper();
+                    newHelper.setHelpRemark(editText.getText().toString());
+                    newHelper.setUser(currentUser);
+                    newHelper.setPost(post);
+                    newHelper.setPostUser(post.getUser());
+                    newHelper.setHelpState(1);
+                    newHelper.save(new SaveListener<String>() {
+                        @Override
+                        public void done(String s, BmobException e) {
+                            if (e==null){
+                                Log.i(TAG, "创建新的helper成功");
+                            }else {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                    showSuccessDialog();
+                }else{
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
 
     private void showDialog(){
         dialog = new Dialog(this);
@@ -198,8 +255,9 @@ public class HelpDetailActivity extends TitleActivity implements View.OnClickLis
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                craetHelper();
                 dialog.dismiss();
-                showSuccessDialog();
+
             }
         });
 
