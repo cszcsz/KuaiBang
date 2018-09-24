@@ -19,6 +19,7 @@ import com.example.kuaibang.adapter.ChatMessageItemRvItemAdapter;
 import com.example.kuaibang.entity.ChatListItem;
 import com.example.kuaibang.entity.Message;
 import com.example.kuaibang.entity.MyUser;
+import com.example.kuaibang.fragment.MessageChatFragment;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -38,14 +39,13 @@ import cn.bmob.newim.listener.ConversationListener;
 import cn.bmob.newim.listener.MessageListHandler;
 import cn.bmob.newim.listener.MessageSendListener;
 import cn.bmob.newim.listener.MessagesQueryListener;
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.QueryListener;
 
 public class ChatActivity extends TitleActivity implements View.OnClickListener,MessageListHandler {
 
-    public static String userName;
-    public static String userHead;
-    public static String chatContent;
 
     public static List<ChatListItem> chatList;
 
@@ -64,6 +64,9 @@ public class ChatActivity extends TitleActivity implements View.OnClickListener,
     boolean isOpenConversation = false;
 
     String userID;
+    String leftUserHeadUrl;
+    String rightUserHeadUrl;
+
 
     BmobIMConversation mBmobIMConversation;
 
@@ -72,6 +75,7 @@ public class ChatActivity extends TitleActivity implements View.OnClickListener,
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         userID = BmobUser.getCurrentUser(MyUser.class).getObjectId();
+        MessageChatFragment.cnt++;
         setContentView();
         initView();
         // 获取从chatList碎片传过来的会话
@@ -80,7 +84,24 @@ public class ChatActivity extends TitleActivity implements View.OnClickListener,
         initListeners();
         initData();
         setTitle(mBmobIMConversation.getConversationTitle());
-        chatList = new ArrayList<>();
+
+        BmobQuery<MyUser> query = new BmobQuery<>();
+        Log.i(TAG, "userID:"+userID);
+        query.getObject(userID, new QueryListener<MyUser>() {
+            @Override
+            public void done(MyUser myUser, BmobException e) {
+                rightUserHeadUrl =  myUser.getHead().getFileUrl();
+                Log.d(TAG, "右边用户头像: "+rightUserHeadUrl);
+            }
+        });
+        BmobQuery<MyUser> query2 = new BmobQuery<>();
+        query2.getObject(mBmobIMConversation.getConversationId(), new QueryListener<MyUser>() {
+            @Override
+            public void done(MyUser myUser, BmobException e) {
+                leftUserHeadUrl = myUser.getHead().getFileUrl();
+                Log.d(TAG, "左边用户头像: "+leftUserHeadUrl);
+            }
+        });
 
     }
 
@@ -131,17 +152,25 @@ public class ChatActivity extends TitleActivity implements View.OnClickListener,
                             msg.setContent(list.get(i).getContent());
                             if(list.get(i).getBmobIMUserInfo().getUserId().equals(userID)){
                                 msg.setType(Message.MESSAGE_SEND);
+                                msg.setAvatar(rightUserHeadUrl);
                             }else if(list.get(i).getBmobIMUserInfo().getUserId().equals(mBmobIMConversation.getConversationId())){
                                 msg.setType(Message.MESSAGE_RECEIVE);
+                                msg.setAvatar(leftUserHeadUrl);
                             }
                             datas.add(msg);
                             Log.i(TAG, list.get(i).getBmobIMUserInfo().getUserId());
                             Log.i(TAG,mBmobIMConversation.getConversationId());
                         }
+                        chatList = new ArrayList<>();
                         ChatListItem item = new ChatListItem();
-                        item.setImgUrl(list.get(0).getBmobIMUserInfo().getAvatar());
+                        item.setImgUrl(mBmobIMConversation.getConversationIcon());
                         item.setContent(list.get(0).getContent());
-                        item.setTitle(list.get(0).getBmobIMUserInfo().getName());
+                        item.setTitle(mBmobIMConversation.getConversationTitle());
+                        item.setConversationId(mBmobIMConversation.getConversationId());
+                        Log.d(TAG,"用户名字:"+ mBmobIMConversation.getConversationTitle());
+                        Log.d(TAG, "用户头像:"+mBmobIMConversation.getConversationIcon());
+                        Log.d(TAG, "消息内容:"+list.get(0).getContent());
+                        Log.d(TAG, "会话id:"+mBmobIMConversation.getConversationTitle());
                         chatList.add(item);
 
                     }

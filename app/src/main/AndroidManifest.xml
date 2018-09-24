@@ -44,12 +44,12 @@
             android:theme="@style/MyActivityTheme" />
         <activity
             android:name=".HelpDetailActivity"
-            android:theme="@style/MyActivityTheme">
-        </activity>
+            android:theme="@style/MyActivityTheme"/>
+
         <activity
             android:name=".MessageActivity"
-            android:theme="@style/MyActivityTheme">
-        </activity>
+            android:theme="@style/MyActivityTheme"/>
+
         <activity
             android:name=".HelpedSummaryActivity"
             android:theme="@style/MyActivityTheme" />
@@ -78,10 +78,13 @@
             android:name=".SetInfoActivity"
             android:theme="@style/MyActivityTheme" />
 
-        <activity android:name=".PublishActivity" >
-        </activity>
-        <activity android:name=".PlusPictureActivity"></activity>
+        <activity
+            android:name=".PublishActivity"
+            android:theme="@style/MyActivityTheme"/>
 
+        <activity
+            android:name=".PlusPictureActivity"
+            android:theme="@style/MyActivityTheme"/>
 
         <activity
             android:name=".AssistProcessActivity"

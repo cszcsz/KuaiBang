@@ -11,7 +11,16 @@ public class ChatListItem extends BmobObject{
     private String title;
     private String content;
     private String imgUrl;
+    private String conversationId;
     private int type;
+
+    public String getConversationId() {
+        return conversationId;
+    }
+
+    public void setConversationId(String conversationId) {
+        this.conversationId = conversationId;
+    }
 
     public String getTitle() {
         return title;

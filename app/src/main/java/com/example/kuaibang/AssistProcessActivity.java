@@ -29,6 +29,10 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.newim.BmobIM;
+import cn.bmob.newim.bean.BmobIMConversation;
+import cn.bmob.newim.bean.BmobIMUserInfo;
+import cn.bmob.newim.listener.ConversationListener;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
@@ -168,7 +172,7 @@ public class AssistProcessActivity extends TitleActivity {
             public void onItemChildClick(final BaseQuickAdapter adapter, View view, final int position) {
                 switch (view.getId()){
                     case R.id.assist_process_helping_item_chatBtn:
-                        ShowToast("进入 找他详聊 界面");
+                        openConversation(position);
                         break;
                     case R.id.assist_process_helping_item_finishBtn:
                         Helper helper = new Helper();
@@ -303,6 +307,33 @@ public class AssistProcessActivity extends TitleActivity {
                 refreshLayout.finishLoadMore(1000);
             }
         });
+    }
+
+    private void openConversation(final int position){
+
+        BmobIMUserInfo info = new BmobIMUserInfo();
+        info.setAvatar(allDatas.get(position).getPostUser().getHead().getFileUrl());
+        info.setUserId(allDatas.get(position).getPostUser().getObjectId());
+        info.setName(allDatas.get(position).getPostUser().getUserName());
+        BmobIM.getInstance().startPrivateConversation(info, new ConversationListener() {
+            @Override
+            public void done(BmobIMConversation conversation, BmobException e) {
+                if(e==null){
+                    // 在此跳转到聊天页面
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("c",conversation);
+                    Intent intent = new Intent();
+                    intent.putExtras(bundle);
+                    intent.setClass(AssistProcessActivity.this,ChatActivity.class);
+                    startActivity(intent);
+                    Log.i(TAG, "开启会话成功！！！");
+                }
+                else {
+                    Log.i(TAG, "开启会话失败");
+                }
+            }
+        });
+
     }
 
     @Override

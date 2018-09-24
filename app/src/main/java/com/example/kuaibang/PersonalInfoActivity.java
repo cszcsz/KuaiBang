@@ -113,8 +113,6 @@ public class PersonalInfoActivity extends TitleActivity implements View.OnClickL
         setTitle(R.string.personal_info_title);
 
         infoHead = findViewById(R.id.personal_info_head);
-        infoIntroduce = findViewById(R.id.personal_info_introduce);
-        infoId = findViewById(R.id.personal_info_id);
         infoUserName = findViewById(R.id.personal_info_username);
         infoUserSex = findViewById(R.id.personal_info_usersex);
         infoTrueName = findViewById(R.id.personal_info_truename);

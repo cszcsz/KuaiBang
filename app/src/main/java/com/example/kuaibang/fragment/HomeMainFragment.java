@@ -64,7 +64,16 @@ public class HomeMainFragment extends Fragment {
         recyclerView = view.findViewById(R.id.home_recycle_view);
         refreshLayout = view.findViewById(R.id.home_refresh_layout);
 
-        allDatas = new ArrayList<>();
+
+        return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (allDatas==null){
+            allDatas = new ArrayList<>();
+        }
         BmobQuery<Post> query = new BmobQuery<>();
         query.addWhereEqualTo("state",1);
         query.include("user");
@@ -97,8 +106,9 @@ public class HomeMainFragment extends Fragment {
                             list.remove(i);
                         }
                     }
-
-                    initializeAdapter(list);
+                    if(adapter==null){
+                        initializeAdapter(list);
+                    }
                     Log.i(TAG, "done: "+String.valueOf(allDatas.size()));
                     Log.i(TAG, "查询初始帖子数据成功!");
 
@@ -109,8 +119,6 @@ public class HomeMainFragment extends Fragment {
 
             }
         });
-
-        return view;
     }
 
     private void initializeAdapter(final List<Post> dataList){

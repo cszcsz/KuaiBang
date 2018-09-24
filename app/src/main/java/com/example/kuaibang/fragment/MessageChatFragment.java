@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.example.kuaibang.AssistProcessActivity;
 import com.example.kuaibang.ChatActivity;
 import com.example.kuaibang.R;
 import com.example.kuaibang.adapter.MessageChatListItemAdapter;
@@ -42,6 +43,7 @@ public class MessageChatFragment extends Fragment{
     private List<ChatListItem> datas;
     private MessageChatListItemAdapter adapter;
 
+    public static int cnt = 0;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,15 +58,45 @@ public class MessageChatFragment extends Fragment{
         recyclerView = view.findViewById(R.id.message_chat_list_recycle_view);
         refreshLayout = view.findViewById(R.id.message_chat_list_refresh_layout);
 
-        datas = new ArrayList<>();
-        ChatListItem chatListItemData;
-        datas = ChatActivity.chatList;
+        return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (datas==null){
+            datas = new ArrayList<>();
+        }
+        if (adapter==null){
+            initAdapterListener();
+        }
+        if (cnt==0){
+            ChatListItem item = new ChatListItem();
+            item.setTitle("石大-王小刚");
+            item.setContent("Hello!");
+            item.setImgUrl("http://bmob-cdn-10446.b0.upaiyun.com/2018/09/24/19d561d340eb385480e4795227aa0437.png");
+            datas.add(item);
+        }else if (adapter.getItemCount()<=ChatActivity.chatList.size()){
+            for (int i =0;i<ChatActivity.chatList.size();i++){
+                datas.add(ChatActivity.chatList.get(i));
+            }
+        }
+
+        adapter.setNewData(datas);
+        adapter.notifyDataSetChanged();
+    }
+
+    private void initAdapterListener(){
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
         adapter = new MessageChatListItemAdapter(R.layout.message_chat_list_item,datas);
 
+
+        adapter.openLoadAnimation();
+        recyclerView.setAdapter(adapter);
         // 为rv中的每个item条目设置点击事件
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
@@ -114,54 +146,33 @@ public class MessageChatFragment extends Fragment{
             }
         });
 
-
-        adapter.openLoadAnimation();
-        recyclerView.setAdapter(adapter);
-
-        return view;
     }
 
     private void openConversation(final int position){
-            BmobIMUserInfo info = new BmobIMUserInfo();
-            info.setAvatar("填写接受者的头像");
-            info.setUserId("ef259ac375");
-            info.setName("居老师");
-            BmobIM.getInstance().startPrivateConversation(info, new ConversationListener() {
-                @Override
-                public void done(BmobIMConversation conversation, BmobException e) {
-                    if(e==null){
-                        // 在此跳转到聊天页面
-                        conversation.queryMessages(null, 1, new MessagesQueryListener() {
-                            @Override
-                            public void done(List<BmobIMMessage> list, BmobException e) {
-                                if(e==null){
-                                    Log.i(TAG, "Fragment页面查询消息成功");
-                                    if(list!=null && list.size()>0){
-                                        Log.i(TAG, list.get(0).getContent());
-                                        datas.get(0).setContent(list.get(0).getContent());
-                                        adapter.notifyDataSetChanged();
-                                    }
-                                }else {
-                                    Log.i(TAG, "Fragment页面查询消息失败");
-                                }
 
-                            }
-                        });
-
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("c",conversation);
-                        Intent intent = new Intent();
-                        intent.putExtras(bundle);
-                        intent.setClass(getContext(),ChatActivity.class);
-                        startActivity(intent);
-                        Log.i(TAG, "开启会话成功！！！");
-                    }
-                    else {
-                        Log.i(TAG, "开启会话失败");
-                    }
+        BmobIMUserInfo info = new BmobIMUserInfo();
+        info.setAvatar(datas.get(position).getImgUrl());
+        info.setUserId(datas.get(position).getConversationId());
+        info.setName(datas.get(position).getTitle());
+        BmobIM.getInstance().startPrivateConversation(info, new ConversationListener() {
+            @Override
+            public void done(BmobIMConversation conversation, BmobException e) {
+                if(e==null){
+                    // 在此跳转到聊天页面
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("c",conversation);
+                    Intent intent = new Intent();
+                    intent.putExtras(bundle);
+                    intent.setClass(getContext(),ChatActivity.class);
+                    startActivity(intent);
+                    Log.i(TAG, "开启会话成功！！！");
                 }
-            });
+                else {
+                    Log.i(TAG, "开启会话失败");
+                }
+            }
+        });
 
-        }
+    }
 
 }
