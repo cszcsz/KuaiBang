@@ -12,6 +12,7 @@ public abstract class TitleActivity extends BaseActivity{
 
     private TextView mTitleTextView;
     private Button mBackwardbButton;
+    private Button mSaveButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -22,8 +23,9 @@ public abstract class TitleActivity extends BaseActivity{
 
     @Override
     public void initView() {
-        mBackwardbButton = (Button) findViewById(R.id.button_backward);
-        mTitleTextView = (TextView) findViewById(R.id.text_title);
+        mBackwardbButton =  findViewById(R.id.button_backward);
+        mTitleTextView = findViewById(R.id.text_title);
+        mSaveButton = findViewById(R.id.button_save);
     }
 
     @Override
@@ -37,6 +39,19 @@ public abstract class TitleActivity extends BaseActivity{
     }
 
 
+    public void setRightTitle(int titleId){
+        mSaveButton.setText(titleId);
+        showSaveButton();
+    }
+
+    public void showSaveButton(){
+        mSaveButton.setVisibility(View.VISIBLE);
+    }
+    public void hideTitle(){
+        mTitleTextView.setVisibility(View.INVISIBLE);
+    }
+    public void hideBackButton(){
+        mBackwardbButton.setVisibility(View.INVISIBLE);}
     public void onClickBack(View view) {
             finish();
     }

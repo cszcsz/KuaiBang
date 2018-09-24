@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/personal_bg_white"
+    tools:context=".PublishActivity">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/layout_title"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp">
+
+
+            <RelativeLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/publish_bar_white"
+                >
+
+                <ImageView
+                    android:id="@+id/publish_topic_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@mipmap/ic_topic"
+                    />
+
+                <TextView
+                    android:id="@+id/publish_topic_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/publish_topic_img"
+                    android:layout_toRightOf="@+id/publish_topic_img"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/publish_topic"
+                    android:textColor="@color/publish_label_gray"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/publish_topic_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/publish_topic_text"
+                    android:layout_toRightOf="@id/publish_topic_text"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@null"
+                    android:textColor="@color/publish_label_content"
+                    android:textSize="15sp"
+                    android:hint="概括一下你的求助吧"/>
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/publish_bar_white"
+                >
+
+                <ImageView
+                    android:id="@+id/publish_content_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@mipmap/ic_content"
+                    />
+
+                <TextView
+                    android:id="@+id/publish_content_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/publish_content_img"
+                    android:layout_toRightOf="@+id/publish_content_img"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/publish_content"
+                    android:textColor="@color/publish_label_gray"
+                    android:textSize="14sp"
+                    />
+
+                <EditText
+                    android:id="@+id/publish_content_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/publish_content_text"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@null"
+                    android:textColor="@color/publish_label_content"
+                    android:textSize="15sp"
+                    android:textAlignment="textStart"
+                    android:gravity="start"
+                    android:hint="描述一下你的求助吧..."/>
+
+                <GridView
+                    android:id="@+id/pictures_grid"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_below="@id/publish_content_edit"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="10dp"
+                    android:horizontalSpacing="1dp"
+                    android:verticalSpacing="1dp"
+                    android:numColumns="3"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/region_picker"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/background_shadow_selector"
+                android:clickable="true"
+                android:focusable="true"
+                >
+
+                <ImageView
+                    android:id="@+id/publish_region_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@mipmap/ic_region"
+                    />
+
+                <TextView
+                    android:id="@+id/publish_region_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/publish_region_img"
+                    android:layout_toRightOf="@+id/publish_region_img"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/publish_region"
+                    android:textColor="@color/publish_label_gray"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/publish_region_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/publish_region_text"
+                    android:layout_toRightOf="@id/publish_region_text"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginRight="30dp"
+                    android:text="南教"
+                    android:textColor="@color/publish_label_content"
+                    android:textSize="15sp" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@mipmap/ic_detail" />
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/publish_bar_white"
+                >
+
+                <ImageView
+                    android:id="@+id/publish_address_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@mipmap/ic_region"
+                    />
+
+                <TextView
+                    android:id="@+id/publish_address_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/publish_address_img"
+                    android:layout_toRightOf="@+id/publish_address_img"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/publish_address"
+                    android:textColor="@color/publish_label_gray"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/publish_address_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/publish_address_text"
+                    android:layout_toRightOf="@id/publish_address_text"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@null"
+                    android:textColor="@color/publish_label_content"
+                    android:textSize="15sp"
+                    android:hint="方便让小伙伴找到你哦"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/duration_picker"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/background_shadow_selector"
+                android:clickable="true"
+                android:focusable="true"
+                >
+
+                <ImageView
+                    android:id="@+id/publish_duration_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@mipmap/ic_duration"
+                    />
+
+                <TextView
+                    android:id="@+id/publish_duration_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/publish_duration_img"
+                    android:layout_toRightOf="@+id/publish_duration_img"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/publish_end_time"
+                    android:textColor="@color/publish_label_gray"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/publish_duration_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/publish_duration_text"
+                    android:layout_toRightOf="@id/publish_duration_text"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginRight="30dp"
+                    android:text="1  天  3  时  25  分"
+                    android:textColor="@color/publish_label_content"
+                    android:textSize="15sp" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@mipmap/ic_detail" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/helper_num_picker"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/background_shadow_selector"
+                android:clickable="true"
+                android:focusable="true"
+                >
+
+                <ImageView
+                    android:id="@+id/publish_helper_num_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@mipmap/ic_helper"
+                    />
+
+                <TextView
+                    android:id="@+id/publish_helper_num_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/publish_helper_num_img"
+                    android:layout_toRightOf="@+id/publish_helper_num_img"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/publish_helper_num"
+                    android:textColor="@color/publish_label_gray"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/publish_helper_num_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/publish_helper_num_text"
+                    android:layout_toRightOf="@id/publish_helper_num_text"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginRight="30dp"
+                    android:textColor="@color/publish_label_content"
+                    android:textSize="15sp" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@mipmap/ic_detail" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/publish_bar_white"
+                >
+
+                <ImageView
+                    android:id="@+id/publish_score_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@mipmap/ic_score"
+                    />
+
+                <TextView
+                    android:id="@+id/publish_score_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/publish_score_img"
+                    android:layout_toRightOf="@+id/publish_score_img"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/publish_score"
+                    android:textColor="@color/publish_label_gray"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/publish_score_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/publish_score_text"
+                    android:layout_toRightOf="@id/publish_score_text"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@null"
+                    android:textColor="@color/publish_label_content"
+                    android:textSize="15sp"
+                    android:hint="事成之后奖励一下Ta"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    
+
+
+</LinearLayout>

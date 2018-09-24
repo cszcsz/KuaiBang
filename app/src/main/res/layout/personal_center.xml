@@ -51,6 +51,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/userscore_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -79,6 +80,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/usercredit_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -109,7 +111,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@color/personal_bar_white"
+        android:background="@drawable/background_shadow_selector"
         android:orientation="horizontal"
         >
 
@@ -156,7 +158,7 @@
             android:id="@+id/personal_info"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@color/personal_bar_white"
+            android:background="@drawable/background_shadow_selector"
             android:clickable="true"
             android:focusable="true"
             android:orientation="horizontal">
@@ -210,7 +212,7 @@
             android:focusable="true"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@color/personal_bar_white"
+            android:background="@drawable/background_shadow_selector"
             >
 
             <ImageView
@@ -260,7 +262,7 @@
             android:focusable="true"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@color/personal_bar_white"
+            android:background="@drawable/background_shadow_selector"
             >
 
             <ImageView
@@ -310,7 +312,7 @@
             android:focusable="true"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@color/personal_bar_white"
+            android:background="@drawable/background_shadow_selector"
             >
 
             <ImageView

@@ -129,7 +129,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 MessageActivity.startMyActivity(MainActivity.this,"data1","data2");
                 break;
             case R.id.home_main_floatBtn:
-                ShowToast("进入发布帖子界面");
+                Intent intent = new Intent(MainActivity.this,PublishActivity.class);
+                startActivity(intent);
                 break;
         }
     }
